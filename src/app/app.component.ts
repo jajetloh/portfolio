@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { MatChipListboxChange } from "@angular/material/chips"
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons"
 
 enum FilterValues {
     LearningResource = 'Learning Resource',
@@ -23,6 +24,8 @@ export class AppComponent {
     filterValue?: FilterValues
 
     faLinkIcon = faArrowUpRightFromSquare
+    faLinkedIn = faLinkedin
+    faGithub = faGithub
 
 
     applyFilter(event: MatChipListboxChange) {
