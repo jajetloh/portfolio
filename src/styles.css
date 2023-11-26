@@ -3,7 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
+@import 'highlight.js/styles/github-dark.css';
+
+html {
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
 }
@@ -12,5 +14,83 @@ html{
     scroll-margin-top: 40px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Highlight JS */
+
+pre {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    word-wrap: break-word;
+
+code {
+    flex: 1;
+    line-height: 1.5em;
+    min-height: 100%;
+    padding: 1em 1.2em;
+
+&.hljs-line-numbers {
+     padding: 0 !important;
+ }
+}
+}
+
+/** Line numbers styles */
+.hljs {
+    margin: 0 1em;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    transition: border ease 1s;
+}
+
+.hljs-ln {
+    padding: 8px 0;
+
+tr {
+&:first-child td {
+     padding-top: 8px !important;
+ }
+
+&:last-child td {
+     padding-bottom: 8px !important;
+ }
+}
+}
+
+/* for block of numbers */
+td.hljs-ln-numbers {
+    user-select: none;
+    text-align: center;
+    border-right: 1px solid gray;
+    vertical-align: top;
+    padding-right: 8px !important;
+    padding-left: 8px !important;
+}
+
+/* for block of code */
+td.hljs-ln-code {
+    padding-left: 8px !important;
+}
+
+button {
+    outline: 0;
+    background: dodgerblue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 14px;
+
+&:hover {
+     background: rgb(0, 106, 212);
+ }
+}

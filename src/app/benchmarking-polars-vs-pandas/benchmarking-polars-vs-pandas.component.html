@@ -1,0 +1,431 @@
+<div class="w-100 flex bg-white py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-4xl text-black c-anchor font-thin" id="top">Benchmarking Polars vs Pandas</h1>
+        <h3 class="text-l text-gray-500 font-thin">5th November 2023</h3>
+        <div>
+            <b>Pandas </b>
+        </div>
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
+<div class="w-100 flex bg-cyan-50 py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-3xl text-black c-anchor font-thin" id="functionality">Functionality</h1>
+        <div>
+            Built-in plotting? (Pandas yes)
+            Lazy execution and query optimisation (Polars yes)
+            Execute SQL? (Polars yes, pandas with pandasql yes)
+            Arbitrary values in columns? (Polars single-type tuples only yes, Pandas yes)
+            Rich datetime support? Yes to both
+            Index? Polars no, see https://pola-rs.github.io/polars/user-guide/migration/pandas/#polars-does-not-have-a-multi-indexindex
+        </div>
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
+<div class="w-100 flex bg-white py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-3xl text-black c-anchor font-thin" id="performance">Performance</h1>
+        <div>
+            Python 3.11.4
+            Pandas 2.0.3
+            Polars 0.19.12 (for Python)
+        </div>
+        <h2 class="text-2xl text-black c-anchor font-thin" id="performance-read-write">Read & Write</h2>
+        <div>
+            <table class="w-full table-fixed">
+                <thead>
+                <tr>
+                    <th class="w-1/2">Test</th>
+                    <th class="w-1/4">Pandas</th>
+                    <th class="w-1/4">Polars</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="px-3">Read 42M rows (5.7 GB) from CSV, seconds</td>
+                    <td class="px-3 border-l border-cyan-700">75.1 s</td>
+                    <td class="px-3 border-l border-cyan-700">39.5 s (-47%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Write 42M rows to parquet file, seconds</td>
+                    <td class="px-3 border-l border-cyan-700">36.5 s</td>
+                    <td class="px-3 border-l border-cyan-700">44.2 s (+21%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Write 42M rows to parquet file, bytes</td>
+                    <td class="px-3 border-l border-cyan-700">1.47 GB</td>
+                    <td class="px-3 border-l border-cyan-700">0.92 GB (-37%)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2 class="text-2xl text-black c-anchor font-thin" id="performance-transformations">Transformations</h2>
+        <div>
+            <table class="w-full table-fixed">
+                <thead>
+                <tr>
+                    <th class="w-1/2">Test</th>
+                    <th class="w-1/4">Pandas</th>
+                    <th class="w-1/4">Polars</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="px-3">Basic arithmetic, 42M rows</td>
+                    <td class="px-3 border-l border-cyan-700">919 ms</td>
+                    <td class="px-3 border-l border-cyan-700">491 ms (-47%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Filter, 42M rows</td>
+                    <td class="px-3 border-l border-cyan-700">601 ms</td>
+                    <td class="px-3 border-l border-cyan-700">505 ms (-16%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Get lead value over variable, 42M rows</td>
+                    <td class="px-3 border-l border-cyan-700">29.3 s</td>
+                    <td class="px-3 border-l border-cyan-700">17.8 s (-39%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Sort, 42M rows</td>
+                    <td class="px-3 border-l border-cyan-700">61.3 s</td>
+                    <td class="px-3 border-l border-cyan-700">166.9 s (+172%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Count per unique value, 42M values</td>
+                    <td class="px-3 border-l border-cyan-700">14.2 s</td>
+                    <td class="px-3 border-l border-cyan-700">10.9 s (-23%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Basic string operations, 42M values</td>
+                    <td class="px-3 border-l border-cyan-700">48.1 s</td>
+                    <td class="px-3 border-l border-cyan-700">27.2 s (-43%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Regex replace in string, 42M values</td>
+                    <td class="px-3 border-l border-cyan-700">109.2 s</td>
+                    <td class="px-3 border-l border-cyan-700">16.9 s (-85%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">String to datetime (format provided), 42M values</td>
+                    <td class="px-3 border-l border-cyan-700">21.5 s</td>
+                    <td class="px-3 border-l border-cyan-700">3.2 s (-85%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Join as-of, 42M values</td>
+                    <td class="px-3 border-l border-cyan-700">16.7 s</td>
+                    <td class="px-3 border-l border-cyan-700">2.9 s (-83%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Left join, 42M values</td>
+                    <td class="px-3 border-l border-cyan-700">16.9 s</td>
+                    <td class="px-3 border-l border-cyan-700">2.6 s (-85%)</td>
+                </tr>
+                <tr>
+                    <td class="px-3">Group and aggregate, 42M values</td>
+                    <td class="px-3 border-l border-cyan-700">6.3 s</td>
+                    <td class="px-3 border-l border-cyan-700">2.1 s (-67%)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
+<div class="w-100 flex bg-cyan-50 py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-3xl text-black c-anchor font-thin mb-3" id="contact">Syntax</h1>
+        <div>
+            <div class="mt-3">
+                One of Polars' greatest strengths is its consistent, predictable and readable syntax. After functionality itself, these are all attributes we may expect from a high-quality library, as they aid in writing, reading and maintaining code. To demonstrate this, let's write the same queries in both Pandas and Polars to explore our eCommerce dataset.
+            </div>
+            <div class="mt-3">
+                First, we'll find the first and last event times for each combination of <code>user_id</code> and <code>user_session</code>, and use that to calculate the duration which that session is active for.
+            </div>
+<!--            <ul class="list-disc ml-5">-->
+<!--                <li>We use this <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store" target="_blank">eCommerce behavior</a> dataset from Kaggle, specifically the October 2019 dataset with 42 million rows and 9 columns, totalling 5.67 GB as a raw CSV file.</li>-->
+<!--                <li>Let's do some basic exploration of the dataset to familiarise ourselves with the data. There are columns with user ids and session ids for those users. First, we'll find the first and last event times for each combination of <code>user_id</code> and <code>user_session</code>, and use that to calculate the duration which that session is active for.</li>-->
+<!--            </ul>-->
+            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePandas1" [languages]="['python']" [lineNumbers]="true"></code></pre>
+            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePolars1" [languages]="['python']" [lineNumbers]="true"></code></pre>
+            <div class="mt-3">Let's note a few things from this.</div>
+            <ol class="mt-3 ml-5 list-decimal">
+                <li>Pandas takes <b>3.5 times longer</b> to run this query than Polars does.</li>
+                <li>With <b>Polars</b>, we can write the entire query as a <b>single chained expression</b>. This may seem trivial, but in my experience is less effort to write and to read, and when compared with Pandas, also reduces unnecessary duplication. Writing this query as a single chained expression is not possible with <b>Pandas</b>, because to define <code>session_duration_secs</code> in the final line, we need to make multiple references to the aggregated DataFrame. In Pandas, we can only do this by referring to the variable containing the DataFrame, but in Polars we simply use <code>pl.col()</code> as many times as we want within <code>.with_columns()</code>.</li>
+                <li>To aggregate the same column multiple ways in <b>Pandas</b>, we need to use the syntax as in line 5, where we either specify a specific aggregation name via string, or provide a function such as <code>np.min</code>. Your IDE's intellisense will however, not be able to help you here if you need to quickly know what default aggregations are available. With <b>Polars</b>, these aggregations are methods which are available after using <code>.agg()</code></li>
+                <li>In <b>Pandas</b>, aggregating after grouping by multiple variables creates a DataFrame with MultiIndex columns. This is irritating if you'd rather not use Pandas' index functionality (like me). We'll see this be more of an issue in the next example.</li>
+                <li>In <b>Polars</b> we have access to <b>Query Optimisation</b> (which Pandas does not have), and this is applied very easily by adding <code>.lazy()</code> and <code>.collect()</code> at the start and end.</li>
+            </ol>
+            <div class="mt-3">
+                Now let's try a couple more things. <b>First</b> we'll get a column with the number of unique sessions for that user by first grouping over <code>user_id</code>, and using a method to count unique entries of another column. <b>Second</b> we'll identify how much time elapses between the end and start of a user's consecutive sessions. To do this, for each user we will order sessions by their start time, and use <code>.shift()</code> to refer to the previous/next session, then using some regular calculated columns.
+            </div>
+            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePandas2" [languages]="['python']" [lineNumbers]="true"></code></pre>
+            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePolars2" [languages]="['python']" [lineNumbers]="true"></code></pre>
+            <div class="mt-3">What do we notice now?</div>
+            <ol class="mt-3 ml-5 list-decimal">
+                <li>Pandas takes 3 times longer than Polars to run these queries.</li>
+                <li>With <b>Pandas</b> we spend rows 2 to 5 calculating for each row, the number of unique sessions for that user. And two of these lines are removing both row and column multi-indexing left by the previous <code>.groupby()</code>. We need to remove this indexing because you can't merge back onto the original DataFrame unless you fiddle around with the indices somehow, and honestly I spent too much time unsuccessfully trying to figure out how to get it to work while keeping the indices.</li>
+                <li>With <b>Polars</b> to get the total unique session counts, we just use <code>.n_unique().over('user_id')</code></li> because Polars supports <code>OVER/PARTITION BY</code> functionality (which you may know from most SQL dialects, but is not available in Pandas).
+                <li>
+                    <div>I'm also going to mention <b>mutability</b> of DataFrames in both libraries here. Reading and maintaining code where variables are immutable is much easier than when they are mutable, because when you want to understand what affects that variable, you simply have to look back to when it was defined. The downside is that if you or the library isn't careful, you end up with a lot of otherwise unnecessarily duplicated data. Both Pandas and Polars have clever methods to minimise this duplication, so <b>treating DataFrames as immutable should be preferred for maintainability</b>.</div>
+                    <div>In Pandas, DataFrames are always mutable - and in fact the usage of this is encouraged by the standard way of defining new calculated columns like <code>df['a'] = df['b'] + df['c']</code> and the numerous methods which can be performed in-place with the keyword argument <code>inplace=True</code>. If you want to find out how a column potentially got it's value, you also need to look for these column assignments and in-place assignments!</div>
+                    <div>In Polars, DataFrames are always immutable, so this is not an issue. And not only is these behind-the-scenes logic to minimise duplication when 'copies' of DataFrames are made, Polars' support of method chaining means that fewer such 'copies' need to be made in the first place, at least compared to Pandas.</div>
+                </li>
+            </ol>
+<!--            <table class="w-full table-fixed">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th class="w-1/3">Description</th>-->
+<!--                    <th class="w-1/3">Pandas</th>-->
+<!--                    <th class="w-1/3">Polars</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <td class="px-3">Get column as series</td>-->
+<!--                    <td class="px-3 border-l border-cyan-700"><code>df['col_a']</code></td>-->
+<!--                    <td class="px-3 border-l border-cyan-700"><code>df['col_a']</code></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="px-3">Select columns</td>-->
+<!--                    <td class="px-3 border-l border-cyan-700"><code>df[['col_a', 'col_b']]</code></td>-->
+<!--                    <td class="px-3 border-l border-cyan-700">-->
+<!--                        <code>df[['col_a', 'col_b']]</code><br>-->
+<!--                        <code>df.select(['col_a', 'col_b'])</code>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="px-3">Get lead value over variable, 42M rows</td>-->
+<!--                    <td class="px-3 border-l border-cyan-700">29.3 s</td>-->
+<!--                    <td class="px-3 border-l border-cyan-700">17.8 s (-39%)</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--            Unlike Pandas, Polars does not support specialised indexing columns or rows. With Pandas, usage of index columns or column headers are built in. For example, when performing a group-by and aggregation, your group-by variables are automatically set as the index, so before these variables are used as regular columns (e.g. to filter them using expressions), <code>.reset_index()</code> must be used to convert them back.-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    Important because clean code is very important - makes logic easier to write, easier for others and self to read, and so debugging and maintenance is easier - especially for highly complex logic.-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    No index columns - treat them as you would regular columns. No special syntax or tricks needed.-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    Clean, consistent syntax (expressions). i.e. can avoid having to reference other dfs multiple times directly within an expression.-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    Immutable dfs. Clear when dfs can possible have values changed etc.-->
+<!--                </li>-->
+<!--            </ul>-->
+        </div>
+<!--        <h2 class="text-2xl text-black c-anchor font-thin" id="performance-transformations">Typing</h2>-->
+<!--        <div>-->
+<!--            hello-->
+<!--        </div>-->
+<!--        <h2 class="text-2xl text-black c-anchor font-thin" id="performance-transformations">Debugging and Maintenance</h2>-->
+<!--        <div>-->
+<!--            hello-->
+<!--        </div>-->
+<!--        <h2 class="text-2xl text-black c-anchor font-thin" id="performance-transformations">Intellisense?</h2>-->
+<!--        <div>-->
+<!--            hello-->
+<!--        </div>-->
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
+<div class="w-100 flex bg-white py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-3xl text-black c-anchor font-thin" id="functionality">Functionality</h1>
+        <table class="w-full table-fixed text-center">
+            <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Pandas</th>
+                <th>Polars</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Native Parallel Processing</td>
+                <td>
+                    <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                    <div class="text-xs">Pandas is only single-threaded natively, but can be parallelised using other libraries (e.g. multiprocessing, dask, modin, etc.)</div>
+                </td>
+                <td>
+                    <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                    <div class="text-xs">Polars runs queries across all available CPU cores by default.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Query Optimisation</td>
+                <td>
+                    <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
+                    <div class="text-xs"></div>
+                </td>
+                <td>
+                    <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                    <div class="text-xs">Polars introduces syntax for lazy execution of queries, which automatically performs query optimisation before executing the query.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Built-in plotting</td>
+                <td>
+                    <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                    <div class="text-xs">Pandas comes with an installation of matplotlib and the <code>.plot()</code> convenience function, without needing the boilerplate of a typical matplotlib plot.</div>
+                </td>
+                <td>
+                    <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
+                    <div></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Arbitrary datatypes in DataFrames</td>
+                <td>
+                    <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                    <div class="text-xs">Values in Pandas dataframes can take arbitrary values (with the object column type, though it is dubious to want to allow completely arbitrary values).</div>
+                </td>
+                <td>
+                    <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
+                    <div class="text-xs">Only supported datatypes are allowed (though homogenous lists and heterogenous structs are both supported).</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Specialised support for list/array columns</td>
+                <td>
+                    <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+<!--                    <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>-->
+                    <div class="text-xs">Pandas has minimal functions to deal specifically with list types, specifically <code>.explode()</code>, and otherwise with <code>.apply()</code> and <code>.transform()</code> without optimisations.</div>
+                </td>
+                <td>
+                    <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                    <div class="text-xs">Polars has <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/list.html">extensive methods to handle list columns</a>, and basic support for <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/array.html">array</a> and <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/struct.html">struct</a> types. Arbitrary Python code can be executed with <code>.apply()</code> and <code>.map_groups()</code>.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Executing SQL</td>
+                <td>
+                    <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
+<!--                    <div>...</div>-->
+                </td>
+                <td>
+                    <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                    <div class="text-xs">Polars can <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/struct.html">execute SQL queries on DataFrames</a> (unsure how useful this is - but it exists).</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Index columns</td>
+                <td>
+                    <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                    <div class="text-xs"></div>
+                </td>
+                <td>
+                    <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
+                    <div class="text-xs">Polars does not use index columns like Pandas does - instead such columns are treated as any other column.</div>
+<!--                    This is a benefit in my opinion, because with Pandas you need to handle operations on index columns and regular columns separately, or reset index columns back to regular columns anyway.-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
+<div class="w-100 flex bg-cyan-50 py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-3xl text-black c-anchor font-thin" id="functionality">Ecosystem</h1>
+        <div>
+            <table class="w-full table-fixed text-center">
+                <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Pandas</th>
+                    <th>Polars</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Plotting and Charts</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs">Most major Python charting libraries have native support for Pandas.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-xs">Plotly has native support for Polars, and other libraries can be used simply by using <code>.to_numpy()</code> or <code>.to_pandas()</code> first.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Scikit-Learn</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-xs">Most functions can accept Pandas DataFrames as input, but only some return results as DataFrames.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-xs">Most functions require conversion using <code>.to_numpy()</code> on input, then casting back to Polars if required with <code>pl.DataFrame()</code>. This isn't the most concise way for the libraries to interface, but is very effective.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Geometry</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs">Via <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://geopandas.org/en/stable/index.html">GeoPandas</a>.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs">Via <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://geopolars.org/latest/">GeoPolars</a>.</div>
+                    </td>
+                </tr>
+<!--                <tr>-->
+<!--                    <td>Database Queries</td>-->
+<!--                    <td>-->
+<!--                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>-->
+<!--                        <div class="text-xs">As the de-facto data frame library for Python, almost all Python libraries built to interface with databases (relational or not), have support for doing so with Pandas, including <a>psycopg2</a> for PostGreSQL.</div>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>-->
+<!--                        <div class="text-xs">Released in 2021. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/polars">PyPI stats</a>, 2,700,000 downloads in the last month.</div>-->
+<!--                    </td>-->
+<!--                </tr>-->
+                <tr>
+                    <td>Maturity</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs">Released in 2008, and nowadays still the standard for tabular data in Python. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/pandas">PyPI stats</a>, 146,000,000 downloads in the last month.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-xs">Released in 2021. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/polars">PyPI stats</a>, 2,700,000 downloads in the last month.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>StackOverflow/GitHub Support</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs">As the de-facto Python library for tabular data, there is abundant support online. 40,000 stars on GitHub.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs">At the time of writing, around 1500 related questions on StackOverflow, and just generally from experience, there is sufficient support from the community to assist learning and debugging. 21,000 stars on GitHub. Issues raised on GitHub are also addressed quickly, from experience.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sponsorship</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs"><a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pandas.pydata.org/about/sponsors.html">Pandas is sponsored</a> by the NumFOCUS US non-profit organisation as well as in-kind and contributor support from various other institutions and organisations.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-xs">Polars is <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://github.com/pola-rs/polars">sponsored by JetBrains</a>, and in <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.dutchnews.nl/businesswire/polars-dataframe-library-announces-seed-funding-from-bain-capital-ventures/">August 2023 received US$4 million in seed funding</a> from Bain Capital Venture and individual investors.</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
