@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core'
 import {
     faAngleDoubleDown, faAngleDown, faAngleUp, faArrowDown, faArrowUp,
-    faArrowUpRightFromSquare, faChartSimple,
+    faChartSimple,
     faCheck, faChevronDown,
     faChevronUp,
-    faCircleChevronUp,
     faXmark
 } from "@fortawesome/free-solid-svg-icons"
 import { faCircle } from "@fortawesome/free-regular-svg-icons"
 import * as performanceData from '../../assets/performance-results.json'
-import {groupBy, mean, sum} from 'lodash-es'
+import {groupBy, sum} from 'lodash-es'
 import {ViewportScroller} from "@angular/common";
 
 @Component({
