@@ -2,7 +2,7 @@
     <div class="flex-col w-1/12 sm:w-2/12"></div>
     <div class="flex-col w-10/12 sm:w-8/12">
         <h1 class="text-4xl text-black c-anchor font-thin" id="top">Benchmarking Polars vs Pandas</h1>
-        <h3 class="text-l text-gray-500 font-thin">10th December 2023</h3>
+        <h3 class="text-l text-gray-500 font-thin">13th December 2023</h3>
     </div>
     <div class="flex-col w-1/12 sm:w-2/12"></div>
 </div>
@@ -12,14 +12,21 @@
         <h1 class="text-3xl text-black c-anchor font-thin" id="summary">Summary</h1>
         <div>
             <div>
-                Polars is fast becoming one of my favourite Python packages to use. It offers itself as a new but hard-hitting competitor to Pandas, the de-facto data table library for Python since 2008, spruiking features like built-in parallelisation, query optimisation, significant performance improvements over Pandas, strict typing and immutability for columns - to name its most impressive qualities thus far.
+                <a class="text-cyan-600 hover:text-cyan-900 hover:underline" href="https://pola.rs/">Polars</a> is fast becoming one of my favourite Python packages to use. It offers itself as a new but hard-hitting competitor to <a class="text-cyan-600 hover:text-cyan-900 hover:underline" href="https://pandas.pydata.org/">Pandas</a>, the de-facto data table library for Python since 2008, spruiking features like built-in parallelisation, query optimisation, significant performance improvements over Pandas, strict typing and immutability for columns - to name its most impressive qualities thus far.
             </div>
             <div class="mt-4">
-                After hearing the pitch and trying the library in my own work instead of Pandas, I was absolutely sold. The next step, was to get the people I work with on board as well, and this is a bit more tricky. Introducing a new package to a team - especially one which attempts to be a replacement for an existing package, can invoke a healthy amount of scepticism. Great that it's selling us these improvements over what we already use, but what about the many other considerations we need to take that aren't Polars' selling points?
+                After hearing the pitch and trying the library in my own work instead of Pandas, I was sold. The next step, was to get the people I work with on board as well, and this is a bit more tricky. Introducing a new package to a team - especially one which attempts to be a replacement for an existing package, can invoke a healthy amount of scepticism. Great that it's selling us these improvements over what we already use, but what about the many other considerations we need to take that aren't Polars' selling points?
             </div>
             <div class="mt-4">
                 In this article, we'll walk through my main considerations when evaluating whether or not a package should be included into the project or not - which means we'll be looking at more than just performance.
             </div>
+            <ul class="mt-3 ml-6 list-disc">
+                <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('performance')">Performance</a></li>
+                <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('syntax')">Syntax</a></li>
+                <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('functionality')">Functionality</a></li>
+                <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('ecosystem')">Ecosystem</a></li>
+                <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('conclusion')">Conclusion</a></li>
+            </ul>
         </div>
     </div>
     <div class="flex-col w-1/12 sm:w-2/12"></div>
@@ -29,22 +36,23 @@
     <div class="flex-col w-10/12 sm:w-8/12">
         <h1 class="text-3xl text-black c-anchor font-thin" id="performance">Performance</h1>
         <div>
-            <p>Polars' biggest selling point is its significant performance improvements compared to Pandas and other data frame libraries for Python. You can check out their <a>performance on the TPCH benchmark here</a>.</p>
-            <p>In order the understand in detail the performance improvements between Pandas and Polars, we look at the time taken for each library to perform each of the following types of operations. For this, we use the latest versions of both Pandas and Polars available as of the 10th Dec 2023 - Pandas 2.1.4 and Polars 0.19.19.</p>
+            <p>Polars' biggest selling point is its significant performance improvements compared to Pandas and other data frame libraries for Python. You can check out their <a class="text-cyan-600 hover:text-cyan-900 hover:underline" href="https://pola.rs/posts/benchmarks/">performance on the TPCH benchmark here</a>.</p>
+            <p>In order the understand in detail the performance improvements between Pandas and Polars, we look at the time taken for each library to perform each of the following types of operations. For this, we use the latest versions of both Pandas and Polars available as of the 10th Dec 2023, and run operations on subsets of the November <a class="text-cyan-600 hover:underline hover:text-cyan-900" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store">eCommerce Behaviour dataset from Michael Kechinov on Kaggle</a>, ranging up to 67.5 million rows.</p>
+            <i class="text-orange-700">Click on the different Operations below to expand, and the <fa-icon class="text-cyan-600" [icon]="faChartSimple"></fa-icon> buttons to view how performance scales for different dataset sizes.</i>
             <table class="w-full table-fixed">
                 <thead>
                 <tr>
                     <th class="w-1/2">
                         Operation
-                        <a class="ml-3 text-sm text-cyan-700 hover:text-cyan-900 font-normal hover:underline cursor-pointer" (click)="showSection = {}; showGraph = {}">Collapse All</a>
+                        <a class="ml-3 text-sm text-cyan-600 hover:text-cyan-900 font-normal hover:underline cursor-pointer" (click)="showSection = {}; showGraph = {}">Collapse All</a>
                     </th>
                     <th class="w-2/6" colspan="2">Time taken for 973,822 rows</th>
                     <th class="w-1/6">Avg. speedup</th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th>Pandas</th>
-                    <th>Polars</th>
+                    <th><div>Pandas</div><div>2.1.4</div></th>
+                    <th><div>Polars</div><div>0.19.19</div></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -52,11 +60,11 @@
                 <ng-container *ngFor="let level1Group of tableDef">
                     <tr>
                         <td class="px-3">
-                            <a class="hover:underline text-cyan-700 hover:text-cyan-900 transition cursor-pointer" (click)="showSection[level1Group.name] = !showSection[level1Group.name]">
+                            <a class="hover:underline text-cyan-600 hover:text-cyan-900 transition cursor-pointer" (click)="showSection[level1Group.name] = !showSection[level1Group.name]">
                                 {{ level1Group.name }}<fa-icon [ngClass]="{'text-orange-500 hover:text-orange-700': showSection[level1Group.name]}" class="ml-3" [icon]="faChevronDown"></fa-icon>
                             </a>
                             <a (click)="showGraph[level1Group.name] = !showGraph[level1Group.name]">
-                                <fa-icon class="ml-3 transition cursor-pointer" [ngClass]="{'text-cyan-700 hover:text-cyan-900': !showGraph[level1Group.name], 'text-orange-500 hover:text-orange-700': showGraph[level1Group.name]}" [icon]="faChartSimple"></fa-icon>
+                                <fa-icon class="ml-3 transition cursor-pointer" [ngClass]="{'text-cyan-600 hover:text-cyan-900': !showGraph[level1Group.name], 'text-orange-500 hover:text-orange-700': showGraph[level1Group.name]}" [icon]="faChartSimple"></fa-icon>
                             </a>
                         </td>
                         <td class="px-3 border-l border-cyan-700">{{ formatSeconds(getLevel1Data(level1Group.name).pandasSample) }}</td>
@@ -74,11 +82,11 @@
                         <ng-container *ngFor="let level2Group of level1Group.children">
                             <tr>
                                 <td class="px-6">
-                                    <a class="hover:underline text-cyan-700 hover:text-cyan-900 transition cursor-pointer" (click)="showSection[level2Group.name] = !showSection[level2Group.name]">
+                                    <a class="hover:underline text-cyan-600 hover:text-cyan-900 transition cursor-pointer" (click)="showSection[level2Group.name] = !showSection[level2Group.name]">
                                         {{ level2Group.name }}<fa-icon [ngClass]="{'text-orange-500 hover:text-orange-700': showSection[level2Group.name]}" class="ml-3" [icon]="faChevronDown"></fa-icon>
                                     </a>
                                     <a (click)="showGraph[level2Group.name] = !showGraph[level2Group.name]">
-                                        <fa-icon class="ml-3 transition cursor-pointer" [ngClass]="{'text-cyan-700 hover:text-cyan-900': !showGraph[level2Group.name], 'text-orange-500 hover:text-orange-700': showGraph[level2Group.name]}" [icon]="faChartSimple"></fa-icon>
+                                        <fa-icon class="ml-3 transition cursor-pointer" [ngClass]="{'text-cyan-600 hover:text-cyan-900': !showGraph[level2Group.name], 'text-orange-500 hover:text-orange-700': showGraph[level2Group.name]}" [icon]="faChartSimple"></fa-icon>
                                     </a>
                                 </td>
                                 <td class="px-6 border-l border-cyan-700">{{ formatSeconds(getLevel2Data(level2Group.name).pandasSample) }}</td>
@@ -96,11 +104,11 @@
                                 <ng-container *ngFor="let level3Group of level2Group.children">
                                     <tr>
                                         <td class="px-9">
-                                            <a class="text-cyan-700">
+                                            <a class="text-cyan-600">
                                                 {{ level3Group.name }}
                                             </a>
                                             <a (click)="showGraph[level3Group.name] = !showGraph[level3Group.name]">
-                                                <fa-icon class="ml-3 transition cursor-pointer" [ngClass]="{'text-cyan-700 hover:text-cyan-900': !showGraph[level3Group.name], 'text-orange-500 hover:text-orange-700': showGraph[level3Group.name]}" [icon]="faChartSimple"></fa-icon>
+                                                <fa-icon class="ml-3 transition cursor-pointer" [ngClass]="{'text-cyan-600 hover:text-cyan-900': !showGraph[level3Group.name], 'text-orange-500 hover:text-orange-700': showGraph[level3Group.name]}" [icon]="faChartSimple"></fa-icon>
                                             </a>
                                         </td>
                                         <td class="px-9 border-l border-cyan-700">{{ formatSeconds(getCaseData(level3Group.name).pandasSample) }}</td>
@@ -122,12 +130,12 @@
                 </ng-container>
 <!--                <tr>-->
 <!--                    <td class="px-3">-->
-<!--                        <span class="hover:underline text-cyan-700 hover:text-cyan-900 transition cursor-pointer" (click)="showPerformanceRows = !showPerformanceRows">-->
+<!--                        <span class="hover:underline text-cyan-600 hover:text-cyan-900 transition cursor-pointer" (click)="showPerformanceRows = !showPerformanceRows">-->
 <!--                            IO Operations<fa-icon class="ml-3" [icon]="showPerformanceRows ? faChevronUp : faChevronDown"></fa-icon>-->
 <!--                        </span>-->
 <!--                        <span (click)="showChart = !showChart">-->
-<!--                            <fa-icon class="ml-3 transition" [ngClass]="{'text-cyan-700 hover:text-cyan-900': !showChart, 'text-orange-500 hover:text-orange-700': showChart}" [icon]="faChartSimple"></fa-icon>-->
-<!--&lt;!&ndash;                            <fa-icon class="ml-3 text-cyan-700 hover:text-cyan-900 transition" [ngClass]="{'text-cyan-700 hover:text-cyan-900': !showChart, 'text-orange-700 hover:text-orange-900': showChart}" [icon]="faChartSimple"></fa-icon>&ndash;&gt;-->
+<!--                            <fa-icon class="ml-3 transition" [ngClass]="{'text-cyan-600 hover:text-cyan-900': !showChart, 'text-orange-500 hover:text-orange-700': showChart}" [icon]="faChartSimple"></fa-icon>-->
+<!--&lt;!&ndash;                            <fa-icon class="ml-3 text-cyan-600 hover:text-cyan-900 transition" [ngClass]="{'text-cyan-600 hover:text-cyan-900': !showChart, 'text-orange-700 hover:text-orange-900': showChart}" [icon]="faChartSimple"></fa-icon>&ndash;&gt;-->
 <!--                        </span>-->
 <!--                    </td>-->
 <!--                    <td class="px-3 border-l border-cyan-700">{{ getLevel1Data('IO').pandasSum.toPrecision(5) }} s</td>-->
@@ -280,44 +288,128 @@
 <div class="w-100 flex bg-cyan-50 py-4">
     <div class="flex-col w-1/12 sm:w-2/12"></div>
     <div class="flex-col w-10/12 sm:w-8/12">
-        <h1 class="text-3xl text-black c-anchor font-thin mb-3" id="contact">Syntax</h1>
+        <h1 class="text-3xl text-black c-anchor font-thin mb-3" id="syntax">Syntax</h1>
         <div>
             <div class="mt-3">
-                One of Polars' greatest strengths is its consistent, predictable and readable syntax. After functionality itself, these are all attributes we may expect from a high-quality library, as they aid in writing, reading and maintaining code. To demonstrate this, let's write the same queries in both Pandas and Polars to explore our eCommerce dataset.
+                Most people learning Polars for the first time are coming with experience from Pandas, so ideally Polars needs to offer benefits to its syntax as compared to Pandas - which it does. The table below compares various aspects of the syntax of both Pandas and Polars.
             </div>
+            <table class="w-full table-fixed text-center border-separate border-spacing-3">
+                <thead>
+                <tr>
+                    <th class="w-1/5">Feature</th>
+                    <th class="w-2/5">Pandas</th>
+                    <th class="w-2/5">Polars</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Style</td>
+                    <td>
+<!--                        <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>-->
+                        <div class="text-sm">Pandas code tends to prefer one line per expression. If you're adding three new calculated columns, each gets their own line, assigning a new column to the existing dataframe. There is also frequent use of mutating existing dataframes, and the canonical way of adding columns to a dataframe uses this.</div>
+                    </td>
+                    <td>
+<!--                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>-->
+                        <div class="text-sm">Polars code tends to prefer longer, chained expressions. Adding three new calculated columns is done as separate lines within a larger <code>.with_columns()</code> method, which can be chained with other method and returns a new dataframe object, distinct from the initial dataframe.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Immutability</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
+                        <div class="text-sm">Pandas objects are mutable, so it is possible to make changes to a data table without explicitly creating a new copy or instance. This adds flexibility in how users are able to write code, but at the cost of making it difficult to tell when a table has or hasn't been changed by only reading through code.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-sm">Polars objects are immutable, so values can only be adjusted by creating a new instance of the object to be mutated. This is beneficial for maintainability, but also due to how Polars works under the hood, does not incur significant additional memory cost.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Interpretability</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-sm">For the most part, Pandas code is easy to follow and make sense of. The difficulty arises when using more sophisticated features, including dealing with indexes and multi-indexes, and the use of the <code>.transform()</code> method.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-sm">After the initial jump of learning Polars' expression syntax (one aspect which is very different from Pandas), there's nothing much else in Polars which is significantly difficult to figure out, besides looking up the precise definitions of specific methods, such as <code>.with_row_count()</code></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Consistency</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-sm">Pandas suffers from being a large library for a long time, in that a lot of different syntax has been added throughout time and is still supported, and this can very easily lead to inconsistency in writing code. Take for example, the argument of the <code>.agg()</code> method - there's at least three different possible types for the argument, depending on whether it was called on a Series of DataFrame object, and some argument types allow more functionality than others.</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-sm">Polars has a much cleaner and consistent syntax for all operations you can think of, and everything fits into the predominant style of chained expressions. This is perhaps not a surprise, as Polars is able to learn from the mistakes of Pandas' syntax, and also frequently updates to keep its syntax towards its intended style.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Modularity</td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-sm">As with most programming languages, you're able to use the power of abstracting logic to functions, conditional statements, and all of that to efficiently write code. However, Polars takes this a step further...</div>
+                    </td>
+                    <td>
+                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
+                        <div class="text-sm">Polars support lazy execution of queries, as well as automatic query optimisation. This means, if you want to abstract code into functions, you can have your functions return <code>LazyFrame</code>s, which can be executed only when required, and automatically performs query optimisation so the resulting performance can be faster than if the individual queries were executed one at a time.</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+<!--            <div class="mt-3">-->
+<!--                One of Polars' greatest strengths is its consistent, predictable and readable syntax. After functionality itself, these are all attributes we may expect from a high-quality library, as they aid in writing, reading and maintaining code. To demonstrate this, let's write the same queries in both Pandas and Polars to explore our eCommerce dataset.-->
+<!--            </div>-->
+<!--            <div class="mt-3">-->
+<!--                First, we'll find the first and last event times for each combination of <code>user_id</code> and <code>user_session</code>, and use that to calculate the duration which that session is active for.-->
+<!--            </div>-->
             <div class="mt-3">
-                First, we'll find the first and last event times for each combination of <code>user_id</code> and <code>user_session</code>, and use that to calculate the duration which that session is active for.
+                Let's finish off by having a look at some examples of both Pandas and Polars code. These next two snippets are doing the same operation, but in each library. We're converting a string column to datetimes, grouping over some variables, finding the earliest and latest dates for each group, and taking the difference.
             </div>
 <!--            <ul class="list-disc ml-5">-->
 <!--                <li>We use this <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store" target="_blank">eCommerce behavior</a> dataset from Kaggle, specifically the October 2019 dataset with 42 million rows and 9 columns, totalling 5.67 GB as a raw CSV file.</li>-->
 <!--                <li>Let's do some basic exploration of the dataset to familiarise ourselves with the data. There are columns with user ids and session ids for those users. First, we'll find the first and last event times for each combination of <code>user_id</code> and <code>user_session</code>, and use that to calculate the duration which that session is active for.</li>-->
 <!--            </ul>-->
-            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePandas1" [languages]="['python']" [lineNumbers]="true"></code></pre>
-            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePolars1" [languages]="['python']" [lineNumbers]="true"></code></pre>
-            <div class="mt-3">Let's note a few things from this.</div>
-            <ol class="mt-3 ml-5 list-decimal">
-                <li>Pandas takes <b>3.5 times longer</b> to run this query than Polars does.</li>
-                <li>With <b>Polars</b>, we can write the entire query as a <b>single chained expression</b>. This may seem trivial, but in my experience is less effort to write and to read, and when compared with Pandas, also reduces unnecessary duplication. Writing this query as a single chained expression is not possible with <b>Pandas</b>, because to define <code>session_duration_secs</code> in the final line, we need to make multiple references to the aggregated DataFrame. In Pandas, we can only do this by referring to the variable containing the DataFrame, but in Polars we simply use <code>pl.col()</code> as many times as we want within <code>.with_columns()</code>.</li>
-                <li>To aggregate the same column multiple ways in <b>Pandas</b>, we need to use the syntax as in line 5, where we either specify a specific aggregation name via string, or provide a function such as <code>np.min</code>. Your IDE's intellisense will however, not be able to help you here if you need to quickly know what default aggregations are available. With <b>Polars</b>, these aggregations are methods which are available after using <code>.agg()</code></li>
-                <li>In <b>Pandas</b>, aggregating after grouping by multiple variables creates a DataFrame with MultiIndex columns. This is irritating if you'd rather not use Pandas' index functionality (like me). We'll see this be more of an issue in the next example.</li>
-                <li>In <b>Polars</b> we have access to <b>Query Optimisation</b> (which Pandas does not have), and this is applied very easily by adding <code>.lazy()</code> and <code>.collect()</code> at the start and end.</li>
-            </ol>
+            <pre class="mt-3 text-sm"><code class="w-full" [highlight]="codePandas1" [languages]="['python']" [lineNumbers]="true"></code></pre>
+            <pre class="mt-3 text-sm"><code class="w-full" [highlight]="codePolars1" [languages]="['python']" [lineNumbers]="true"></code></pre>
             <div class="mt-3">
-                Now let's try a couple more things. <b>First</b> we'll get a column with the number of unique sessions for that user by first grouping over <code>user_id</code>, and using a method to count unique entries of another column. <b>Second</b> we'll identify how much time elapses between the end and start of a user's consecutive sessions. To do this, for each user we will order sessions by their start time, and use <code>.shift()</code> to refer to the previous/next session, then using some regular calculated columns.
+                Both snippets are great, we're able to clearly discern what is happening in each. Let's now look at a more complex example, using the results from the above snippets as a starting point.
             </div>
-            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePandas2" [languages]="['python']" [lineNumbers]="true"></code></pre>
-            <pre class="mt-3 text-xs"><code class="w-full" [highlight]="codePolars2" [languages]="['python']" [lineNumbers]="true"></code></pre>
-            <div class="mt-3">What do we notice now?</div>
-            <ol class="mt-3 ml-5 list-decimal">
-                <li>Pandas takes 3 times longer than Polars to run these queries.</li>
-                <li>With <b>Pandas</b> we spend rows 2 to 5 calculating for each row, the number of unique sessions for that user. And two of these lines are removing both row and column multi-indexing left by the previous <code>.groupby()</code>. We need to remove this indexing because you can't merge back onto the original DataFrame unless you fiddle around with the indices somehow, and honestly I spent too much time unsuccessfully trying to figure out how to get it to work while keeping the indices.</li>
-                <li>With <b>Polars</b> to get the total unique session counts, we just use <code>.n_unique().over('user_id')</code></li> because Polars supports <code>OVER/PARTITION BY</code> functionality (which you may know from most SQL dialects, but is not available in Pandas).
-                <li>
-                    <div>I'm also going to mention <b>mutability</b> of DataFrames in both libraries here. Reading and maintaining code where variables are immutable is much easier than when they are mutable, because when you want to understand what affects that variable, you simply have to look back to when it was defined. The downside is that if you or the library isn't careful, you end up with a lot of otherwise unnecessarily duplicated data. Both Pandas and Polars have clever methods to minimise this duplication, so <b>treating DataFrames as immutable should be preferred for maintainability</b>.</div>
-                    <div>In Pandas, DataFrames are always mutable - and in fact the usage of this is encouraged by the standard way of defining new calculated columns like <code>df['a'] = df['b'] + df['c']</code> and the numerous methods which can be performed in-place with the keyword argument <code>inplace=True</code>. If you want to find out how a column potentially got it's value, you also need to look for these column assignments and in-place assignments!</div>
-                    <div>In Polars, DataFrames are always immutable, so this is not an issue. And not only is these behind-the-scenes logic to minimise duplication when 'copies' of DataFrames are made, Polars' support of method chaining means that fewer such 'copies' need to be made in the first place, at least compared to Pandas.</div>
-                </li>
-            </ol>
+            <div class="mt-3">
+                We're adding a few more columns this time, firstly a column with the number of unique sessions that particular user has, then for each user's sessions we find the times their previous and next sessions, and find the time since or until those.
+            </div>
+<!--            <div class="mt-3">Let's note a few things from this.</div>-->
+<!--            <ol class="mt-3 ml-5 list-decimal">-->
+<!--                <li>Pandas takes <b>3.5 times longer</b> to run this query than Polars does.</li>-->
+<!--                <li>With <b>Polars</b>, we can write the entire query as a <b>single chained expression</b>. This may seem trivial, but in my experience is less effort to write and to read, and when compared with Pandas, also reduces unnecessary duplication. Writing this query as a single chained expression is not possible with <b>Pandas</b>, because to define <code>session_duration_secs</code> in the final line, we need to make multiple references to the aggregated DataFrame. In Pandas, we can only do this by referring to the variable containing the DataFrame, but in Polars we simply use <code>pl.col()</code> as many times as we want within <code>.with_columns()</code>.</li>-->
+<!--                <li>To aggregate the same column multiple ways in <b>Pandas</b>, we need to use the syntax as in line 5, where we either specify a specific aggregation name via string, or provide a function such as <code>np.min</code>. Your IDE's intellisense will however, not be able to help you here if you need to quickly know what default aggregations are available. With <b>Polars</b>, these aggregations are methods which are available after using <code>.agg()</code></li>-->
+<!--                <li>In <b>Pandas</b>, aggregating after grouping by multiple variables creates a DataFrame with MultiIndex columns. This is irritating if you'd rather not use Pandas' index functionality (like me). We'll see this be more of an issue in the next example.</li>-->
+<!--                <li>In <b>Polars</b> we have access to <b>Query Optimisation</b> (which Pandas does not have), and this is applied very easily by adding <code>.lazy()</code> and <code>.collect()</code> at the start and end.</li>-->
+<!--            </ol>-->
+<!--            <div class="mt-3">-->
+<!--                Now let's try a couple more things. <b>First</b> we'll get a column with the number of unique sessions for that user by first grouping over <code>user_id</code>, and using a method to count unique entries of another column. <b>Second</b> we'll identify how much time elapses between the end and start of a user's consecutive sessions. To do this, for each user we will order sessions by their start time, and use <code>.shift()</code> to refer to the previous/next session, then using some regular calculated columns.-->
+<!--            </div>-->
+            <pre class="mt-3 text-sm"><code class="w-full" [highlight]="codePandas2" [languages]="['python']" [lineNumbers]="true"></code></pre>
+            <pre class="mt-3 text-sm"><code class="w-full" [highlight]="codePolars2" [languages]="['python']" [lineNumbers]="true"></code></pre>
+            <div class="mt-3">
+                The first thing we notice in the Pandas code, is some funky business with the columns of the table? It's not clear what the purpose of line 3 is - this line is needed to flatten the column multi-indexes created in the previous snippet, when we performed a <code>.agg()</code> on the same column in multiple ways (using <code>min</code> and <code>max</code>). So problem number 1 is that it's not clear that this even happened in the previous snippet, but we need to deal with it now as otherwise we can't refer to columns the same way as before.
+            </div>
+            <div class="mt-3">
+                After getting over this, we see that the Pandas example seems a bit more verbose, but this is because we're having to refer to the name of the input table name multiple times, whereas we don't need to do this with Polars. So, besides that multi-index column behaviour with Pandas, both are pretty interpretable.
+            </div>
+<!--            <div class="mt-3">What do we notice now?</div>-->
+<!--            <ol class="mt-3 ml-5 list-decimal">-->
+<!--                <li>Pandas takes 3 times longer than Polars to run these queries.</li>-->
+<!--                <li>With <b>Pandas</b> we spend rows 2 to 5 calculating for each row, the number of unique sessions for that user. And two of these lines are removing both row and column multi-indexing left by the previous <code>.groupby()</code>. We need to remove this indexing because you can't merge back onto the original DataFrame unless you fiddle around with the indices somehow, and honestly I spent too much time unsuccessfully trying to figure out how to get it to work while keeping the indices.</li>-->
+<!--                <li>With <b>Polars</b> to get the total unique session counts, we just use <code>.n_unique().over('user_id')</code></li> because Polars supports <code>OVER/PARTITION BY</code> functionality (which you may know from most SQL dialects, but is not available in Pandas).-->
+<!--                <li>-->
+<!--                    <div>I'm also going to mention <b>mutability</b> of DataFrames in both libraries here. Reading and maintaining code where variables are immutable is much easier than when they are mutable, because when you want to understand what affects that variable, you simply have to look back to when it was defined. The downside is that if you or the library isn't careful, you end up with a lot of otherwise unnecessarily duplicated data. Both Pandas and Polars have clever methods to minimise this duplication, so <b>treating DataFrames as immutable should be preferred for maintainability</b>.</div>-->
+<!--                    <div>In Pandas, DataFrames are always mutable - and in fact the usage of this is encouraged by the standard way of defining new calculated columns like <code>df['a'] = df['b'] + df['c']</code> and the numerous methods which can be performed in-place with the keyword argument <code>inplace=True</code>. If you want to find out how a column potentially got it's value, you also need to look for these column assignments and in-place assignments!</div>-->
+<!--                    <div>In Polars, DataFrames are always immutable, so this is not an issue. And not only is these behind-the-scenes logic to minimise duplication when 'copies' of DataFrames are made, Polars' support of method chaining means that fewer such 'copies' need to be made in the first place, at least compared to Pandas.</div>-->
+<!--                </li>-->
+<!--            </ol>-->
 <!--            <table class="w-full table-fixed">-->
 <!--                <thead>-->
 <!--                <tr>-->
@@ -382,12 +474,15 @@
     <div class="flex-col w-1/12 sm:w-2/12"></div>
     <div class="flex-col w-10/12 sm:w-8/12">
         <h1 class="text-3xl text-black c-anchor font-thin" id="functionality">Functionality</h1>
-        <table class="w-full table-fixed text-center">
+        <div class="mt-3">
+            We've seen that Polars performs better than Pandas, and that the syntax is also better to work with, but can it do everything that Pandas can? Naturally, both libraries have a lot of common functionality, so we're only going to cover significant differences in capabilities between the libraries here.
+        </div>
+        <table class="w-full table-fixed text-center border-separate border-spacing-3">
             <thead>
             <tr>
-                <th>Feature</th>
-                <th>Pandas</th>
-                <th>Polars</th>
+                <th class="w-1/5">Feature</th>
+                <th class="w-2/5">Pandas</th>
+                <th class="w-2/5">Polars</th>
             </tr>
             </thead>
             <tbody>
@@ -395,29 +490,29 @@
                 <td>Native Parallel Processing</td>
                 <td>
                     <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
-                    <div class="text-xs">Pandas is only single-threaded natively, but can be parallelised using other libraries (e.g. multiprocessing, dask, modin, etc.)</div>
+                    <div class="text-sm">Pandas is only single-threaded natively, but can be parallelised using other libraries (e.g. multiprocessing, dask, modin, etc.)</div>
                 </td>
                 <td>
                     <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                    <div class="text-xs">Polars runs queries across all available CPU cores by default.</div>
+                    <div class="text-sm">Polars runs queries across all available CPU cores by default.</div>
                 </td>
             </tr>
             <tr>
                 <td>Query Optimisation</td>
                 <td>
                     <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
-                    <div class="text-xs"></div>
+                    <div class="text-sm"></div>
                 </td>
                 <td>
                     <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                    <div class="text-xs">Polars introduces syntax for lazy execution of queries, which automatically performs query optimisation before executing the query.</div>
+                    <div class="text-sm">Polars introduces syntax for lazy execution of queries, which automatically performs query optimisation before executing the query.</div>
                 </td>
             </tr>
             <tr>
                 <td>Built-in plotting</td>
                 <td>
                     <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                    <div class="text-xs">Pandas comes with an installation of matplotlib and the <code>.plot()</code> convenience function, without needing the boilerplate of a typical matplotlib plot.</div>
+                    <div class="text-sm">Pandas comes with an installation of matplotlib and the <code>.plot()</code> convenience function, without needing the boilerplate of a typical matplotlib plot.</div>
                 </td>
                 <td>
                     <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
@@ -428,11 +523,11 @@
                 <td>Arbitrary datatypes in DataFrames</td>
                 <td>
                     <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                    <div class="text-xs">Values in Pandas dataframes can take arbitrary values (with the object column type, though it is dubious to want to allow completely arbitrary values).</div>
+                    <div class="text-sm">Values in Pandas dataframes can take arbitrary values (with the object column type, though it is dubious to want to allow completely arbitrary values).</div>
                 </td>
                 <td>
                     <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
-                    <div class="text-xs">Only supported datatypes are allowed (though homogenous lists and heterogenous structs are both supported).</div>
+                    <div class="text-sm">Only supported datatypes are allowed (though homogenous lists and heterogenous structs are both supported).</div>
                 </td>
             </tr>
             <tr>
@@ -440,11 +535,11 @@
                 <td>
                     <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
 <!--                    <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>-->
-                    <div class="text-xs">Pandas has minimal functions to deal specifically with list types, specifically <code>.explode()</code>, and otherwise with <code>.apply()</code> and <code>.transform()</code> without optimisations.</div>
+                    <div class="text-sm">Pandas has minimal functions to deal specifically with list types, specifically <code>.explode()</code>, and otherwise with <code>.apply()</code> and <code>.transform()</code> without optimisations.</div>
                 </td>
                 <td>
                     <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                    <div class="text-xs">Polars has <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/list.html">extensive methods to handle list columns</a>, and basic support for <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/array.html">array</a> and <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/struct.html">struct</a> types. Arbitrary Python code can be executed with <code>.apply()</code> and <code>.map_groups()</code>.</div>
+                    <div class="text-sm">Polars has <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/list.html">extensive methods to handle list columns</a>, and basic support for <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/array.html">array</a> and <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/struct.html">struct</a> types. Arbitrary Python code can be executed with <code>.apply()</code> and <code>.map_groups()</code>.</div>
                 </td>
             </tr>
             <tr>
@@ -455,18 +550,18 @@
                 </td>
                 <td>
                     <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                    <div class="text-xs">Polars can <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/struct.html">execute SQL queries on DataFrames</a> (unsure how useful this is - but it exists).</div>
+                    <div class="text-sm">Polars can <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/py-polars/html/reference/expressions/struct.html">execute SQL queries on DataFrames</a> (unsure how useful this is - but it exists).</div>
                 </td>
             </tr>
             <tr>
                 <td>Index columns</td>
                 <td>
                     <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                    <div class="text-xs"></div>
+                    <div class="text-sm"></div>
                 </td>
                 <td>
                     <div><fa-icon class="ml-1 text-red-500" [icon]="faXmark" size="xl"></fa-icon></div>
-                    <div class="text-xs">Polars does not use index columns like Pandas does - instead such columns are treated as any other column.</div>
+                    <div class="text-sm">Polars does not use index columns like Pandas does - instead such columns are treated as any other column.</div>
 <!--                    This is a benefit in my opinion, because with Pandas you need to handle operations on index columns and regular columns separately, or reset index columns back to regular columns anyway.-->
                 </td>
             </tr>
@@ -478,14 +573,17 @@
 <div class="w-100 flex bg-cyan-50 py-4">
     <div class="flex-col w-1/12 sm:w-2/12"></div>
     <div class="flex-col w-10/12 sm:w-8/12">
-        <h1 class="text-3xl text-black c-anchor font-thin" id="functionality">Ecosystem</h1>
+        <h1 class="text-3xl text-black c-anchor font-thin" id="ecosystem">Ecosystem</h1>
         <div>
-            <table class="w-full table-fixed text-center">
+            <div class="mt-3">
+                Whichever library you use, you'll likely not be using them in isolation, but alongside other libraries. Let's finish off by having a look at how each library interacts with the wider Python and software ecosystem.
+            </div>
+            <table class="w-full table-fixed text-center border-separate border-spacing-3">
                 <thead>
                 <tr>
-                    <th>Feature</th>
-                    <th>Pandas</th>
-                    <th>Polars</th>
+                    <th class="w-1/5">Consideration</th>
+                    <th class="w-2/5">Pandas</th>
+                    <th class="w-2/5">Polars</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -493,81 +591,101 @@
                     <td>Plotting and Charts</td>
                     <td>
                         <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs">Most major Python charting libraries have native support for Pandas.</div>
+                        <div class="text-sm">Most major Python charting libraries have native support for Pandas.</div>
                     </td>
                     <td>
                         <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
-                        <div class="text-xs">Plotly has native support for Polars, and other libraries can be used simply by using <code>.to_numpy()</code> or <code>.to_pandas()</code> first.</div>
+                        <div class="text-sm">So far, only Plotly has native support for Polars, and other libraries can be used simply by using <code>.to_numpy()</code> or <code>.to_pandas()</code> first.</div>
                     </td>
                 </tr>
                 <tr>
                     <td>Scikit-Learn</td>
                     <td>
                         <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
-                        <div class="text-xs">Most functions can accept Pandas DataFrames as input, but only some return results as DataFrames.</div>
+                        <div class="text-sm">Most functions can accept Pandas DataFrames as input, but only some return results as DataFrames.</div>
                     </td>
                     <td>
                         <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
-                        <div class="text-xs">Most functions require conversion using <code>.to_numpy()</code> on input, then casting back to Polars if required with <code>pl.DataFrame()</code>. This isn't the most concise way for the libraries to interface, but is very effective.</div>
+                        <div class="text-sm">Most functions require conversion using <code>.to_numpy()</code> on input, then casting back to Polars if required with <code>pl.DataFrame()</code>. This isn't the most concise way for the libraries to interface, but is very effective.</div>
                     </td>
                 </tr>
                 <tr>
                     <td>Geometry</td>
                     <td>
                         <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs">Via <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://geopandas.org/en/stable/index.html">GeoPandas</a>.</div>
+                        <div class="text-sm">Via <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://geopandas.org/en/stable/index.html">GeoPandas</a>.</div>
                     </td>
                     <td>
                         <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs">Via <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://geopolars.org/latest/">GeoPolars</a>.</div>
+                        <div class="text-sm">Via <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://geopolars.org/latest/">GeoPolars</a>.</div>
                     </td>
                 </tr>
 <!--                <tr>-->
 <!--                    <td>Database Queries</td>-->
 <!--                    <td>-->
 <!--                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>-->
-<!--                        <div class="text-xs">As the de-facto data frame library for Python, almost all Python libraries built to interface with databases (relational or not), have support for doing so with Pandas, including <a>psycopg2</a> for PostGreSQL.</div>-->
+<!--                        <div class="text-sm">As the de-facto data frame library for Python, almost all Python libraries built to interface with databases (relational or not), have support for doing so with Pandas, including <a>psycopg2</a> for PostGreSQL.</div>-->
 <!--                    </td>-->
 <!--                    <td>-->
 <!--                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>-->
-<!--                        <div class="text-xs">Released in 2021. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/polars">PyPI stats</a>, 2,700,000 downloads in the last month.</div>-->
+<!--                        <div class="text-sm">Released in 2021. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/polars">PyPI stats</a>, 2,700,000 downloads in the last month.</div>-->
 <!--                    </td>-->
 <!--                </tr>-->
                 <tr>
                     <td>Maturity</td>
                     <td>
                         <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs">Released in 2008, and nowadays still the standard for tabular data in Python. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/pandas">PyPI stats</a>, 146,000,000 downloads in the last month.</div>
+                        <div class="text-sm">Released in 2008, and nowadays still the standard for tabular data in Python. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/pandas">PyPI stats</a>, 146,000,000 downloads in the last month.</div>
                     </td>
                     <td>
                         <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
-                        <div class="text-xs">Released in 2021. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/polars">PyPI stats</a>, 2,700,000 downloads in the last month.</div>
+                        <div class="text-sm">Released in 2021. From <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pypistats.org/packages/polars">PyPI stats</a>, 2,700,000 downloads in the last month.</div>
                     </td>
                 </tr>
                 <tr>
                     <td>StackOverflow/GitHub Support</td>
                     <td>
                         <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs">As the de-facto Python library for tabular data, there is abundant support online. 40,000 stars on GitHub.</div>
+                        <div class="text-sm">As the de-facto Python library for tabular data, there is abundant support online. 40,000 stars on GitHub.</div>
                     </td>
                     <td>
-                        <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs">At the time of writing, around 1500 related questions on StackOverflow, and just generally from experience, there is sufficient support from the community to assist learning and debugging. 21,000 stars on GitHub. Issues raised on GitHub are also addressed quickly, from experience.</div>
+                        <div><fa-icon class="ml-1 text-yellow-500" [icon]="faCircle" size="xl"></fa-icon></div>
+                        <div class="text-sm">At the time of writing, around 1500 related questions on StackOverflow, and just generally from experience, there is sufficient support from the community to assist learning and debugging. 21,000 stars on GitHub. Issues raised on GitHub are also addressed quickly, from experience.</div>
                     </td>
                 </tr>
                 <tr>
                     <td>Sponsorship</td>
                     <td>
                         <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs"><a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pandas.pydata.org/about/sponsors.html">Pandas is sponsored</a> by the NumFOCUS US non-profit organisation as well as in-kind and contributor support from various other institutions and organisations.</div>
+                        <div class="text-sm"><a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pandas.pydata.org/about/sponsors.html">Pandas is sponsored</a> by the NumFOCUS US non-profit organisation as well as in-kind and contributor support from various other institutions and organisations.</div>
                     </td>
                     <td>
                         <div><fa-icon class="ml-1 text-green-500" [icon]="faCheck" size="xl"></fa-icon></div>
-                        <div class="text-xs">Polars is <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://github.com/pola-rs/polars">sponsored by JetBrains</a>, and in <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.dutchnews.nl/businesswire/polars-dataframe-library-announces-seed-funding-from-bain-capital-ventures/">August 2023 received US$4 million in seed funding</a> from Bain Capital Venture and individual investors.</div>
+                        <div class="text-sm">Polars is <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://github.com/pola-rs/polars">sponsored by JetBrains</a>, and in <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.dutchnews.nl/businesswire/polars-dataframe-library-announces-seed-funding-from-bain-capital-ventures/">August 2023 received US$4 million in seed funding</a> from Bain Capital Venture and individual investors.</div>
                     </td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
+<div class="w-100 flex bg-white py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-3xl text-black c-anchor font-thin" id="conclusion">Conclusion</h1>
+        <div class="mt-3">
+            Polars does indeed have aspects in which it dominates Pandas, some in which it is slightly better, and some which it is poorer.
+        </div>
+        <div class="mt-3">
+            In my eyes, the only reasons not to go with Polars are two-fold, and are related to each other.
+        </div>
+        <ol class="ml-6 list-decimal">
+            <li>Polars is still a relatively young library, and lacks the stability that Pandas has been able to maintain. We can hope that future updates to Polars continue to build on its functionality in a way that the community supports, but we can't assume this like we can with Pandas.</li>
+            <li>Because Polars usage is still growing, the amount of community support (such as on StackOverflow) is still small compared to Pandas, and especially if you're a less experienced programmer trying to use Polars to do some more advanced, but not necessarily supported functionality, you may have better luck searching forums for help with Pandas instead.</li>
+        </ol>
+        <div class="mt-3">
+            Personally I see these two downsides as worth the massive performance, syntax and functionality improvements which Polars offers, so at least for myself, I know what library I'll be relying on moving forward for my Python data table needs, and I hope that the information presented here as also helped you to understand which is the better solution for your use case.
         </div>
     </div>
     <div class="flex-col w-1/12 sm:w-2/12"></div>

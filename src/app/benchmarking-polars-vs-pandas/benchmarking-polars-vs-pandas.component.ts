@@ -10,6 +10,7 @@ import {
 import { faCircle } from "@fortawesome/free-regular-svg-icons"
 import * as performanceData from '../../assets/performance-results.json'
 import {groupBy, mean, sum} from 'lodash-es'
+import {ViewportScroller} from "@angular/common";
 
 @Component({
     selector: 'app-benchmarking-polars-vs-pandas',
@@ -204,8 +205,18 @@ pl_between_sessions_df = pl_session_agg_df.lazy().with_columns([
     (pl.col('next_session_start_time') - pl.col('session_start_time')).dt.seconds().truediv(3600).alias('hrs_to_next_session'),
 ]).collect()`
 
+    constructor(private viewportScroller: ViewportScroller) {
+        this.viewportScroller.setOffset([0,40])
+    }
+
+    scrollToSelector(id: string) {
+        console.log(123)
+        this.viewportScroller.scrollToAnchor(id)
+    }
+
     ngOnInit() {
     }
+
 
     getLevel1Data(level1Name: string): { pandasSum: number, polarsSum: number, ratio: number, plotData: any, plotLayout: any, pandasSample: number, polarsSample: number } {
         if (level1Name in this.dataCacheLevel1Groups) {
