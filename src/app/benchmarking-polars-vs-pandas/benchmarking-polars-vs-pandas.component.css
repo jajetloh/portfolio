@@ -5,3 +5,21 @@ code {
 pre code {
     color: white;
 }
+
+.do-rotate-180 {
+    animation: rotate-180 200ms linear;
+}
+
+@keyframes rotate-180 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+plotly-plot {
+    height: 600px;
+    width: 100%;
+}

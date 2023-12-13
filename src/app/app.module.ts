@@ -9,6 +9,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { BenchmarkingPolarsVsPandasComponent } from './benchmarking-polars-vs-pandas/benchmarking-polars-vs-pandas.component';
 import { PortfolioComponent } from './portfolio/portfolio.component'
 import { HIGHLIGHT_OPTIONS, HighlightModule } from "ngx-highlightjs"
+import {PlotlyModule} from "angular-plotly.js";
+import * as PlotlyJS from 'plotly.js-dist-min';
+
+PlotlyModule.plotlyjs = PlotlyJS
 
 @NgModule({
     declarations: [
@@ -23,6 +27,7 @@ import { HIGHLIGHT_OPTIONS, HighlightModule } from "ngx-highlightjs"
         FontAwesomeModule,
         AppRoutingModule,
         HighlightModule,
+        PlotlyModule,
     ],
     providers: [
         {
