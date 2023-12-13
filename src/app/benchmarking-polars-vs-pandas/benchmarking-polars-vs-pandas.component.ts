@@ -31,10 +31,8 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
     showSection: {[k: string]: boolean} = {}
     showGraph: {[k: string]: boolean} = {}
 
-    showPerformanceRows = true
     performanceData: any[] = (performanceData as any).default.filter((x: any) => x['PROPERTY_2'] > 10000)
 
-    showChart = false
 
     tableDef = [
         {
@@ -314,7 +312,6 @@ pl_between_sessions_df = pl_session_agg_df.lazy().with_columns([
 
         const polarsDurationMap = polarsValues.reduce((p,c) => {p[c['PROPERTY_2']]=c['VALUE']; return p}, {})
         const ratio = Math.pow(pandasValues.map(x => polarsDurationMap[x['PROPERTY_2']]/x['VALUE']).reduce((p,c) => p*c,1), 1/pandasValues.length)
-        // let ratio = pandasSum / polarsSum
 
         let plotData = [
             {
