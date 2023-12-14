@@ -11,6 +11,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component'
 import { HIGHLIGHT_OPTIONS, HighlightModule } from "ngx-highlightjs"
 import {PlotlyModule} from "angular-plotly.js";
 import * as PlotlyJS from 'plotly.js-dist-min';
+import {NgOptimizedImage} from "@angular/common";
 
 PlotlyModule.plotlyjs = PlotlyJS
 
@@ -28,6 +29,7 @@ PlotlyModule.plotlyjs = PlotlyJS
         AppRoutingModule,
         HighlightModule,
         PlotlyModule,
+        NgOptimizedImage,
     ],
     providers: [
         {

@@ -3,6 +3,9 @@
     <div class="flex-col w-10/12 sm:w-8/12">
         <h1 class="text-4xl text-black c-anchor font-thin" id="top">Benchmarking Polars vs Pandas</h1>
         <h3 class="text-l text-gray-500 font-thin">13th December 2023</h3>
+        <div class="flex justify-center">
+            <img class="object-center w-3/5" src="assets/polars-pandas-splash.png">
+        </div>
     </div>
     <div class="flex-col w-1/12 sm:w-2/12"></div>
 </div>
@@ -38,7 +41,7 @@
         <div>
             <p>Polars' biggest selling point is its significant performance improvements compared to Pandas and other data frame libraries for Python. You can check out their <a class="text-cyan-600 hover:text-cyan-900 hover:underline" href="https://pola.rs/posts/benchmarks/">performance on the TPCH benchmark here</a>.</p>
             <p>In order the understand in detail the performance improvements between Pandas and Polars, we look at the time taken for each library to perform each of the following types of operations. For this, we use the latest versions of both Pandas and Polars available as of the 10th Dec 2023, and run operations on subsets of the November <a class="text-cyan-600 hover:underline hover:text-cyan-900" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store">eCommerce Behaviour dataset from Michael Kechinov on Kaggle</a>, ranging up to 67.5 million rows.</p>
-            <i class="text-orange-700">Click on the different Operations below to expand, and the <fa-icon class="text-cyan-600" [icon]="faChartSimple"></fa-icon> buttons to view how performance scales for different dataset sizes.</i>
+            <i class="text-pink-600">Click on the different Operations below to expand, and the <fa-icon class="text-cyan-600" [icon]="faChartSimple"></fa-icon> buttons to view how performance scales for different dataset sizes.</i>
             <table class="w-full table-fixed">
                 <thead>
                 <tr>

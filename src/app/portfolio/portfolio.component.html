@@ -39,13 +39,14 @@
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.ResearchThesis" class="bg-white border border-gray-100 rounded-md p-2">
                     <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'benchmarking-polars-vs-pandas'" target="_blank">Benchmarking Polars vs Pandas<fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Research Article</h4>
-                    <img class="border border-gray-300 mb-3" src="assets/thumb-web-dev-crash-course.png">
+                    <img class="border border-gray-300 mb-3" src="assets/polars-pandas-splash.png">
                     <span>Comparing the Polars and Pandas dataframe libraries for Python across performance, functionality, ecosystem and more.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.LearningResource" class="bg-white border border-gray-100 rounded-md p-2">
                     <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/web-dev-crash-course/" target="_blank">Web Dev Crash Course <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Learning Resource</h4>
-                    <img class="border border-gray-300 mb-3" src="assets/thumb-web-dev-crash-course.png">
+                    <img class="border border-gray-300 mb-3" ngSrc="assets/thumb-web-dev-crash-course.png" height="362"
+                         width="764">
                     <span>Jump head first into key concepts in modern Web Development, and get hands-on with exercises designed to give you a sense of what Web Development is like.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Code" class="bg-white border border-gray-100 rounded-md p-2">

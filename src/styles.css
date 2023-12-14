@@ -90,7 +90,7 @@ button {
     padding: 10px;
     margin: 14px;
 
-&:hover {
-     background: rgb(0, 106, 212);
- }
+/*&:hover {*/
+/*     background: rgb(0, 106, 212);*/
+/* }*/
 }

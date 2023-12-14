@@ -21,8 +21,10 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
     faCheck = faCheck
     faCircle = faCircle
     faXmark = faXmark
-    protected readonly faChevronUp = faChevronUp
-    protected readonly faChevronDown = faChevronDown
+    faChevronDown = faChevronDown
+    faChartSimple = faChartSimple
+    faArrowUp = faArrowUp
+    faArrowDown = faArrowDown
 
     dataCacheCases : {[k: string]: any} = {}
     dataCacheLevel1Groups : {[k: string]: any} = {}
@@ -153,13 +155,6 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
         }
     ]
 
-    graph = {
-        data: [
-            { x: [1, 2, 3], y: [2, 6, 3], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
-            { x: [1, 2, 3], y: [2, 5, 3], type: 'bar' },
-        ],
-        layout: {title: 'A Fancy Plot', autosize: true},
-    }
     noModeBarsConfig = {
         modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'toImage']
     }
@@ -356,12 +351,7 @@ pl_between_sessions_df = pl_session_agg_df.lazy().with_columns([
         }
     }
 
-    protected readonly faChartSimple = faChartSimple;
-    protected readonly faAngleDoubleDown = faAngleDoubleDown;
-    protected readonly faAngleDown = faAngleDown;
-    protected readonly faAngleUp = faAngleUp;
-    protected readonly faArrowUp = faArrowUp;
-    protected readonly faArrowDown = faArrowDown;
+
 }
 
 
