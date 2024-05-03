@@ -6,8 +6,8 @@ import {
 import { PortfolioComponent } from "./portfolio/portfolio.component"
 
 const routes: Routes = [
-    { path: '', component: PortfolioComponent },
-    { path: 'benchmarking-polars-vs-pandas', component: BenchmarkingPolarsVsPandasComponent },
+    { path: '', component: PortfolioComponent, title: 'Ja-Jet Loh' },
+    { path: 'benchmarking-polars-vs-pandas', component: BenchmarkingPolarsVsPandasComponent, title: 'Benchmarking Polars vs Pandas' },
 ];
 
 @NgModule({

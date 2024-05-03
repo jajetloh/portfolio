@@ -2,7 +2,7 @@
     <div class="flex-col w-1/12 sm:w-2/12"></div>
     <div class="flex-col w-10/12 sm:w-8/12">
         <h1 class="text-4xl text-black c-anchor font-thin" id="top">Benchmarking Polars vs Pandas</h1>
-        <h3 class="text-l text-gray-500 font-thin">13th December 2023</h3>
+        <h3 class="text-l text-gray-500 font-thin">28th December 2023</h3>
         <div class="flex justify-center">
             <img class="object-center w-3/5" src="assets/polars-pandas-splash.png">
         </div>
@@ -29,6 +29,7 @@
                 <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('functionality')">Functionality</a></li>
                 <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('ecosystem')">Ecosystem</a></li>
                 <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('conclusion')">Conclusion</a></li>
+                <li><a class="text-cyan-600 hover:text-cyan-900 hover:underline cursor-pointer" (click)="scrollToSelector('other-resources')">Other Resources</a></li>
             </ul>
         </div>
     </div>
@@ -40,7 +41,7 @@
         <h1 class="text-3xl text-black c-anchor font-thin" id="performance">Performance</h1>
         <div>
             <p>Polars' biggest selling point is its significant performance improvements compared to Pandas and other data frame libraries for Python. You can check out their <a class="text-cyan-600 hover:text-cyan-900 hover:underline" href="https://pola.rs/posts/benchmarks/">performance on the TPCH benchmark here</a>.</p>
-            <p>In order the understand in detail the performance improvements between Pandas and Polars, we look at the time taken for each library to perform each of the following types of operations. For this, we use the latest versions of both Pandas and Polars available as of the 10th Dec 2023, and run operations on subsets of the November <a class="text-cyan-600 hover:underline hover:text-cyan-900" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store">eCommerce Behaviour dataset from Michael Kechinov on Kaggle</a>, ranging up to 67.5 million rows.</p>
+            <p>In order the understand in detail the performance improvements between Pandas and Polars, we look at the time taken for each library to perform each of the following types of operations. For this, we use the latest versions of both Pandas and Polars available as of the 10th Dec 2023, and run operations on subsets of the November <a class="text-cyan-600 hover:underline hover:text-cyan-900" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store">eCommerce Behaviour dataset from Michael Kechinov on Kaggle</a>, ranging up to 16.4 million rows.</p>
             <i class="text-pink-600">Click on the different Operations below to expand, and the <fa-icon class="text-cyan-600" [icon]="faChartSimple"></fa-icon> buttons to view how performance scales for different dataset sizes.</i>
             <table class="w-full table-fixed">
                 <thead>
@@ -55,7 +56,7 @@
                 <tr>
                     <th></th>
                     <th><div>Pandas</div><div>2.1.4</div></th>
-                    <th><div>Polars</div><div>0.19.19</div></th>
+                    <th><div>Polars</div><div>0.20.2</div></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -433,6 +434,44 @@
         </ol>
         <div class="mt-3">
             Personally I see these two downsides as worth the massive performance, syntax and functionality improvements which Polars offers, so at least for myself, I know what library I'll be relying on moving forward for my Python data table needs, and I hope that the information presented here as also helped you to understand which is the better solution for your use case.
+        </div>
+    </div>
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+</div>
+<div class="w-100 flex bg-cyan-50 py-4">
+    <div class="flex-col w-1/12 sm:w-2/12"></div>
+    <div class="flex-col w-10/12 sm:w-8/12">
+        <h1 class="text-3xl text-black c-anchor font-thin" id="other-resources">Other Resources</h1>
+        <div>
+            <div class="mt-3">
+                Here are some more resources online for more on Polars and Pandas.
+            </div>
+            <ul class="ml-6 list-disc">
+                <li>
+                    <div>
+                        <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola.rs/posts/benchmarks/">Polars TPCH Benchmarks</a>
+                    </div>
+                    <div>
+                        Polars performance benchmark data as per the Polars blog.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://pola-rs.github.io/polars/user-guide/misc/alternatives/">Alternatives (Polars documentation)</a>
+                    </div>
+                    <div>
+                        A more complete list of other Python dataframe libraries and their features in comparison with Polars.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://wesmckinney.com/blog/apache-arrow-pandas-internals/">Wes McKinney - Apache Arrow and the "10 things I hate about pandas"</a>
+                    </div>
+                    <div>
+                        Wes McKinney is the creator and <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">BDFL</a> of the Pandas library. This 2017 article lists 10 shortcomings of Pandas in the eyes of its creator. Note that this article was written before both Polars and Pandas 2.0 were released, and both libraries now address many of the 10 shortcomings listed in some way.
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="flex-col w-1/12 sm:w-2/12"></div>

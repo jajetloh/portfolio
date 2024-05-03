@@ -45,18 +45,18 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
                     name: 'Write',
                     level: 2,
                     children: [
-                        { name: 'write-csv', level: 3 },
-                        { name: 'write-ipc', level: 3 },
-                        { name: 'write-parquet', level: 3 },
+                        { name: 'Write CSV', level: 3 },
+                        { name: 'Write IPC', level: 3 },
+                        { name: 'Write Parquet', level: 3 },
                     ],
                 },
                 {
                     name: 'Read',
                     level: 2,
                     children: [
-                        { name: 'read-csv', level: 3 },
-                        { name: 'read-ipc', level: 3 },
-                        { name: 'read-parquet', level: 3 },
+                        { name: 'Read CSV', level: 3 },
+                        { name: 'Read IPC', level: 3 },
+                        { name: 'Read Parquet', level: 3 },
                     ],
                 },
             ],
@@ -69,17 +69,17 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
                     name: 'Arithmetic',
                     level: 2,
                     children: [
-                        { name: 'arithmetic-simple', level: 3 },
-                        { name: 'arithmetic-advanced', level: 3 },
+                        { name: 'Simple Arithmetic', level: 3 },
+                        { name: 'Advanced Arithmetic', level: 3 },
                     ],
                 },
                 {
                     name: 'String Operations',
                     level: 2,
                     children: [
-                        { name: 'string-ops', level: 3 },
-                        { name: 'string-regex', level: 3 },
-                        { name: 'string-to-datetime', level: 3 },
+                        { name: 'Common String Operations', level: 3 },
+                        { name: 'Regex String Operations', level: 3 },
+                        { name: 'Parsing String to Datetime (given format)', level: 3 },
                     ],
                 },
             ],
@@ -92,29 +92,31 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
                     name: 'Sorting',
                     level: 2,
                     children: [
-                        { name: 'sort', level: 3 },
+                        { name: 'Sort by One Variable', level: 3 },
+                        { name: 'Sort by Two Variables', level: 3 },
+                        { name: 'Sort by Three Variables', level: 3 },
                     ],
                 },
                 {
                     name: 'Unique',
                     level: 2,
                     children: [
-                        { name: 'unique', level: 3 },
+                        { name: 'Unique Values of a Column', level: 3 },
                     ],
                 },
                 {
                     name: 'Group and Aggregate',
                     level: 2,
                     children: [
-                        { name: 'group-and-agg', level: 3 },
+                        { name: 'Group and Aggregate', level: 3 },
                     ],
                 },
                 {
                     name: 'Window Expressions',
                     level: 2,
                     children: [
-                        { name: 'window-functions', level: 3 },
-                        { name: 'cumulative-functions', level: 3 },
+                        { name: 'Window Functions', level: 3 },
+                        { name: 'Cumulative Functions', level: 3 },
                     ],
                 },
             ],
@@ -127,15 +129,16 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
                     name: 'Joins',
                     level: 2,
                     children: [
-                        { name: 'left-join', level: 3 },
-                        { name: 'join-asof', level: 3 },
+                        { name: 'Left Join', level: 3 },
+                        { name: 'Join As Of', level: 3 },
+                        { name: 'Join on Inequalities', level: 3 },
                     ],
                 },
                 {
                     name: 'Concatenation',
                     level: 2,
                     children: [
-                        { name: 'vertical-union', level: 3 },
+                        { name: 'Concatenate Rows', level: 3 },
                     ],
                 },
             ],
@@ -145,10 +148,10 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
             level: 1,
             children: [
                 {
-                    name: 'Case 1',
+                    name: 'Combined Transformations',
                     level: 2,
                     children: [
-                        { name: 'transformations', level: 3 },
+                        { name: 'Combined Transformations Case 1', level: 3 },
                     ],
                 },
             ],
@@ -202,7 +205,6 @@ pl_between_sessions_df = pl_session_agg_df.lazy().with_columns([
     }
 
     scrollToSelector(id: string) {
-        console.log(123)
         this.viewportScroller.scrollToAnchor(id)
     }
 
