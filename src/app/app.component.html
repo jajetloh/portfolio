@@ -48,6 +48,12 @@
                         </mat-chip-listbox>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 justify-items-center my-3">
+                        <div *ngIf="filterValue === undefined || filterValue === FilterValues.Application" class="bg-white border border-gray-100 rounded-md p-2">
+                            <h1 class="text-lg text-cyan-600 hover:text-cyan-800 transition-all cursor-pointer"><a href="https://d1n2j965q39dpw.cloudfront.net/" target="_blank">Infinitree <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                            <h4 class="text-xs text-gray-400 mb-1">Web Application</h4>
+                            <img class="border border-gray-300 mb-3" src="assets/thumb-infinitree.png">
+                            <span>Solver and tree visualisations for the <a class="text-cyan-600 hover:text-cyan-800 transition-all" href="https://neal.fun/infinite-craft/" target="_blank">Infinite Craft</a> game by Neal Agarwal.</span>
+                        </div>
                         <div *ngIf="filterValue === undefined || filterValue === FilterValues.LearningResource" class="bg-white border border-gray-100 rounded-md p-2">
                             <h1 class="text-lg text-cyan-600 hover:text-cyan-800 transition-all cursor-pointer"><a href="https://jajetloh.github.io/web-dev-crash-course/" target="_blank">Web Dev Crash Course <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                             <h4 class="text-xs text-gray-400 mb-1">Learning Resource</h4>
