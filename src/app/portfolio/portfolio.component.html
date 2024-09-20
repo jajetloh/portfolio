@@ -35,6 +35,12 @@
                 </mat-chip-listbox>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 justify-items-center my-3">
+                <div *ngIf="filterValue === undefined || filterValue === FilterValues.Code" class="bg-white border border-gray-100 rounded-md p-2">
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/ttgen" target="_blank">TTGen <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h4 class="text-xs text-gray-400 mb-1">Code (Python)</h4>
+                    <img class="border border-gray-300 mb-3" src="assets/thumb-ttgen.png">
+                    <span>Highly efficient Python package for generating combinations of sets with duplicates (a.k.a. multisets), with exponential speed-up compared to the default Python implementation for multisets with high multiplicity. Based on <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://arxiv.org/abs/1503.00067" target="_blank">O(1) Time Generation of Adjacent Multiset Combinations</a> by Tadao Takaoka.</span>
+                </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Application" class="bg-white border border-gray-100 rounded-md p-2">
                     <h1 class="text-lg text-cyan-600 hover:text-cyan-800 transition-all cursor-pointer"><a href="https://d1n2j965q39dpw.cloudfront.net/" target="_blank">Infinitree <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Web Application</h4>
