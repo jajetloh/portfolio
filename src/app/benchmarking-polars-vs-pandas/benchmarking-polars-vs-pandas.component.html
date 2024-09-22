@@ -2,7 +2,7 @@
     <div class="flex-col w-1/12 sm:w-2/12"></div>
     <div class="flex-col w-10/12 sm:w-8/12">
         <h1 class="text-4xl text-black c-anchor font-thin" id="top">Benchmarking Polars vs Pandas</h1>
-        <h3 class="text-l text-gray-500 font-thin">28th December 2023</h3>
+        <h3 class="text-l text-gray-500 font-thin">21st September 2024</h3>
         <div class="flex justify-center">
             <img class="object-center w-3/5" src="assets/polars-pandas-splash.png">
         </div>
@@ -41,9 +41,9 @@
         <h1 class="text-3xl text-black c-anchor font-thin" id="performance">Performance</h1>
         <div>
             <p>Polars' biggest selling point is its significant performance improvements compared to Pandas and other data frame libraries for Python. You can check out their <a class="text-cyan-600 hover:text-cyan-900 hover:underline" href="https://pola.rs/posts/benchmarks/">performance on the TPCH benchmark here</a>.</p>
-            <p>In order the understand in detail the performance improvements between Pandas and Polars, we look at the time taken for each library to perform each of the following types of operations. For this, we use the latest versions of both Pandas and Polars available as of the 10th Dec 2023, and run operations on subsets of the November <a class="text-cyan-600 hover:underline hover:text-cyan-900" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store">eCommerce Behaviour dataset from Michael Kechinov on Kaggle</a>, ranging up to 16.4 million rows.</p>
+            <p>In order the understand in detail the performance improvements between Pandas and Polars, we look at the time taken for each library to perform each of the following types of operations. For this, we use the latest versions of both Pandas and Polars available as of the <b>21st September 2024</b>, and run operations on subsets of the November <a class="text-cyan-600 hover:underline hover:text-cyan-900" href="https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store">eCommerce Behaviour dataset from Michael Kechinov on Kaggle</a>, ranging up to 16.4 million rows.</p>
             <i class="text-pink-600">Click on the different Operations below to expand, and the <fa-icon class="text-cyan-600" [icon]="faChartSimple"></fa-icon> buttons to view how performance scales for different dataset sizes.</i>
-            <table class="w-full table-fixed">
+            <table class="w-full table-fixed ml-3">
                 <thead>
                 <tr>
                     <th class="w-1/2">
@@ -55,15 +55,15 @@
                 </tr>
                 <tr>
                     <th></th>
-                    <th><div>Pandas</div><div>2.1.4</div></th>
-                    <th><div>Polars</div><div>0.20.2</div></th>
+                    <th><div>Pandas</div><div>2.2.3</div></th>
+                    <th><div>Polars</div><div>1.7.1</div></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <ng-container *ngFor="let level1Group of tableDef">
                     <tr>
-                        <td class="px-3">
+                        <td>
                             <a class="hover:underline text-cyan-600 hover:text-cyan-900 transition cursor-pointer" (click)="showSection[level1Group.name] = !showSection[level1Group.name]">
                                 {{ level1Group.name }}<fa-icon [ngClass]="{'text-orange-500 hover:text-orange-700': showSection[level1Group.name]}" class="ml-3" [icon]="faChevronDown"></fa-icon>
                             </a>
@@ -85,7 +85,7 @@
                     <ng-container *ngIf="showSection[level1Group.name]">
                         <ng-container *ngFor="let level2Group of level1Group.children">
                             <tr>
-                                <td class="px-6">
+                                <td class="px-12">
                                     <a class="hover:underline text-cyan-600 hover:text-cyan-900 transition cursor-pointer" (click)="showSection[level2Group.name] = !showSection[level2Group.name]">
                                         {{ level2Group.name }}<fa-icon [ngClass]="{'text-orange-500 hover:text-orange-700': showSection[level2Group.name]}" class="ml-3" [icon]="faChevronDown"></fa-icon>
                                     </a>
@@ -107,7 +107,7 @@
                             <ng-container *ngIf="showSection[level2Group.name]">
                                 <ng-container *ngFor="let level3Group of level2Group.children">
                                     <tr>
-                                        <td class="px-9">
+                                        <td class="px-24">
                                             <a class="text-cyan-600">
                                                 {{ level3Group.name }}
                                             </a>

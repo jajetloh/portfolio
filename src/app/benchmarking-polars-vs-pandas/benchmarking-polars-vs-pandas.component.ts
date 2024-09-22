@@ -162,7 +162,7 @@ export class BenchmarkingPolarsVsPandasComponent implements OnInit {
         modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'toImage']
     }
 
-    codePandas1 = `# Pandas - 83 s runtime
+    codePandas1 = `# Pandas - 32 s runtime
 pd_session_agg_df = pd_df.copy()
 pd_session_agg_df['event_time'] = pd.to_datetime(pd_df['event_time'], format='%Y-%m-%d %H:%M:%S UTC')
 pd_session_agg_df = pd_session_agg_df.groupby(['user_id', 'user_session']).agg({
@@ -170,7 +170,7 @@ pd_session_agg_df = pd_session_agg_df.groupby(['user_id', 'user_session']).agg({
 })
 pd_session_agg_df['session_duration_secs'] = (pd_session_agg_df[('event_time', 'max')] - pd_session_agg_df[('event_time', 'min')]).dt.total_seconds()`
 
-    codePolars1 = `# Polars - 24 s runtime (3.5x shorter)
+    codePolars1 = `# Polars - 3.8 s runtime (8.4× faster)
 pl_session_agg_df = pl_df.lazy().with_columns([
     pl.col('event_time').str.strptime(pl.Datetime('ms'), '%Y-%m-%d %H:%M:%S UTC')
 ]).group_by(['user_id', 'user_session']).agg([
@@ -180,7 +180,7 @@ pl_session_agg_df = pl_df.lazy().with_columns([
     (pl.col('session_end_time') - pl.col('session_start_time')).dt.seconds().alias('session_duration_secs'),
 ]).collect()`
 
-    codePandas2 = `# Pandas - 33.6 s runtime
+    codePandas2 = `# Pandas - 14.3 s runtime
 pd_between_sessions_df = pd_session_agg_df.reset_index()
 pd_between_sessions_df.columns = [k1 if k2 == '' else f'{k1}_{k2}' for k1, k2 in pd_between_sessions_df]
 unique_sessions_per_user = pd_between_sessions_df.groupby('user_id')['user_session'].nunique().reset_index().rename(columns={'user_session': 'unique_session_for_user'})
@@ -190,7 +190,7 @@ pd_between_sessions_df['next_session_start_time'] = pd_between_sessions_df.sort_
 pd_between_sessions_df['hrs_from_last_session'] = (pd_between_sessions_df['event_time_min'] - pd_between_sessions_df['prev_session_end_time']).dt.total_seconds() / 3600
 pd_between_sessions_df['hrs_to_next_session'] = (pd_between_sessions_df['next_session_start_time'] - pd_between_sessions_df['event_time_max']).dt.total_seconds() / 3600`
 
-    codePolars2 = `# Polars - 11.7s runtime
+    codePolars2 = `# Polars - 6.3s runtime (2.3× faster)
 pl_between_sessions_df = pl_session_agg_df.lazy().with_columns([
     pl.col('user_session').n_unique().over('user_id').alias('unique_sessions_for_user'),
     pl.col('session_end_time').sort_by('session_start_time', descending=False).shift(1).over('user_id').alias('prev_session_end_time'),
