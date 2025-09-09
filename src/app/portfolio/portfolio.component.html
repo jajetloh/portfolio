@@ -32,9 +32,22 @@
                     <mat-chip-option [value]="FilterValues.Code">Code</mat-chip-option>
                     <mat-chip-option [value]="FilterValues.Application">Applications</mat-chip-option>
                     <mat-chip-option [value]="FilterValues.ResearchThesis">Articles and Documents</mat-chip-option>
+                    <mat-chip-option [value]="FilterValues.Presentation">Presentations</mat-chip-option>
                 </mat-chip-listbox>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 justify-items-center my-3">
+                <div *ngIf="filterValue === undefined || filterValue === FilterValues.Presentation" class="bg-white border border-gray-100 rounded-md p-2">
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'ddd-perth-2025'" target="_blank">Hobbyist to Open Source Founder <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h4 class="text-xs text-gray-400 mb-1">Conference Presentation</h4>
+                    <img class="border border-gray-300 mb-3" src="assets/ddd-perth-2025-home.png">
+                    <span>In this talk, I explore what it means for software to be considered Free and Open Source Software, delve into the research of why individuals and enterprise invests time and effort into FOSS, and talk about more generally about impact - and the implications on my own FOSS library, QuokkaSim.</span>
+                </div>
+<!--                <div *ngIf="filterValue === undefined || filterValue === FilterValues.ResearchThesis" class="bg-white border border-gray-100 rounded-md p-2">-->
+<!--                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'time-range-transformations'" target="_blank">Time Range Transformations<fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>-->
+<!--                    <h4 class="text-xs text-gray-400 mb-1">Guide</h4>-->
+<!--                    <img class="border border-gray-300 mb-3" src="assets/polars-pandas-splash.png">-->
+<!--                    <span>...</span>-->
+<!--                </div>-->
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Code" class="bg-white border border-gray-100 rounded-md p-2">
                     <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/ttgen" target="_blank">TTGen <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Code (Python)</h4>

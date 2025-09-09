@@ -12,6 +12,8 @@ import { HIGHLIGHT_OPTIONS, HighlightModule } from "ngx-highlightjs"
 import {PlotlyModule} from "angular-plotly.js";
 import * as PlotlyJS from 'plotly.js-dist-min';
 import {NgOptimizedImage} from "@angular/common";
+import { TimeRangeTransformationsComponent } from './time-range-transformations/time-range-transformations.component';
+import { DddPerth2025Component } from './ddd-perth2025/ddd-perth2025.component';
 
 PlotlyModule.plotlyjs = PlotlyJS
 
@@ -19,7 +21,9 @@ PlotlyModule.plotlyjs = PlotlyJS
     declarations: [
         AppComponent,
         BenchmarkingPolarsVsPandasComponent,
-        PortfolioComponent
+        PortfolioComponent,
+        TimeRangeTransformationsComponent,
+        DddPerth2025Component
     ],
     imports: [
         BrowserModule,

@@ -9,6 +9,7 @@ enum FilterValues {
     Code = 'Code',
     Application = 'Application',
     ResearchThesis = 'Document',
+    Presentation = 'Presentation',
 }
 
 @Component({
