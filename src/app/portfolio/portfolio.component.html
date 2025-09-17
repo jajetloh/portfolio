@@ -6,15 +6,15 @@
             <div>
                 <ul class="ml-6 list-disc">
                     <li>
-                        I'm a <b>Consultant</b> at <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://visagio.com/en/home/" target="_blank">Visagio Australia</a>, specialising in <b>Software Development</b>, <b>Modelling and Analysis</b> and <b>Advanced Analytics</b>
+                        I'm a <b>Consultant</b> at <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://visagio.com/en/home/">Visagio Australia</a>, specialising in <b>Software Development</b>, <b>Modelling and Analysis</b> and <b>Advanced Analytics</b>, as part of the Visagio Group's <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.v-dev.io/en">v(dev)</a> and <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.v-labs.io/en">VLabs</a> business units.
                     </li>
                     <li>
-                        I am a <b>Computational Physicist</b> by training, having earned my Master of Physics from the University of Western Australia, and completed my <a href="#thesis" class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all">thesis</a> under <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://research-repository.uwa.edu.au/en/persons/jingbo-wang" target="_blank">Prof. Jingbo Wang</a>
+                        I am a <b>Computational Physicist</b> by training, having earned my Master of Physics from the University of Western Australia, and completed my <a href="#thesis" class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all">thesis</a> under <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://research-repository.uwa.edu.au/en/persons/jingbo-wang">Prof. Jingbo Wang</a>
                     </li>
                 </ul>
             </div>
             <div class="flex sm:ml-5 justify-center">
-                <img style="min-width: 200px; max-width: 200px; min-height: 200px; max-height: 200px; border-radius: 50%" src="assets/self-photo.jpeg">
+                <img style="min-width: 200px; max-width: 200px; min-height: 200px; max-height: 200px; border-radius: 50%" src="assets/self-photo.jpg">
             </div>
         </div>
     </div>
@@ -37,86 +37,98 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 justify-items-center my-3">
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Presentation" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'ddd-perth-2025'" target="_blank">Hobbyist to Open Source Founder <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'ddd-perth-2025'">Hobbyist to Open Source Founder <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Conference Presentation</h4>
-                    <img class="border border-gray-300 mb-3" src="assets/ddd-perth-2025-home.png">
-                    <span>In this talk, I explore what it means for software to be considered Free and Open Source Software, delve into the research of why individuals and enterprise invests time and effort into FOSS, and talk about more generally about impact - and the implications on my own FOSS library, QuokkaSim.</span>
+                    <img class="border border-gray-300 mb-3" src="assets/thumb-ddd-2025.png">
+                    <span>In this talk, I explore what it means for software to be considered Free and Open Source Software, delve into the research of why individuals and enterprise invests time and effort into FOSS, and talk about more generally about impact - and the implications on my own FOSS library, <a class="text-cyan-600 hover:text-cyan-800 transition-all" href="https://github.com/jajetloh/quokkasim">QuokkaSim</a>.</span>
                 </div>
 <!--                <div *ngIf="filterValue === undefined || filterValue === FilterValues.ResearchThesis" class="bg-white border border-gray-100 rounded-md p-2">-->
-<!--                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'time-range-transformations'" target="_blank">Time Range Transformations<fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>-->
+<!--                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'time-range-transformations'">Time Range Transformations<fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>-->
 <!--                    <h4 class="text-xs text-gray-400 mb-1">Guide</h4>-->
 <!--                    <img class="border border-gray-300 mb-3" src="assets/polars-pandas-splash.png">-->
 <!--                    <span>...</span>-->
 <!--                </div>-->
+                <div *ngIf="filterValue === undefined || filterValue === FilterValues.LearningResource" class="bg-white border border-gray-100 rounded-md p-2">
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/quokkasim-book/">The QuokkaSim Book <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h4 class="text-xs text-gray-400 mb-1">Learning Resource</h4>
+                    <img class="border border-gray-300 mb-3" src="assets/thumb-quokkasim-book.png">
+                    <span>Official documentation and guides for the <a class="text-cyan-600 hover:text-cyan-800 transition-all" href="https://github.com/jajetloh/quokkasim">QuokkaSim</a> simulation framework.</span>
+                </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Code" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/ttgen" target="_blank">TTGen <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/quokkasim">QuokkaSim <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h4 class="text-xs text-gray-400 mb-1">Code (Rust)</h4>
+                    <img class="border border-gray-300 mb-3" src="assets/thumb-quokkasim.png">
+                    <span>A Rust framework for building efficient, accessible and sustainable Process Simulation models. QuokkaSim is zero-cost and Open Source, and combines the benefits of Rust's compile-time checks, the efficiency of <a class="text-cyan-600 hover:text-cyan-800 transition-all" href="https://github.com/asynchronics/nexosim">nexosim</a> runtime, and the minimal memory footprint of binaries compiled from Rust.</span>
+                </div>
+                <div *ngIf="filterValue === undefined || filterValue === FilterValues.Code" class="bg-white border border-gray-100 rounded-md p-2">
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/ttgen">TTGen <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Code (Python)</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-ttgen.png">
-                    <span>Highly efficient Python package for generating combinations of sets with duplicates (a.k.a. multisets), with exponential speed-up compared to the default Python implementation for multisets with high multiplicity. Based on <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://arxiv.org/abs/1503.00067" target="_blank">O(1) Time Generation of Adjacent Multiset Combinations</a> by Tadao Takaoka.</span>
+                    <span>Highly efficient Python package for generating combinations of sets with duplicates (a.k.a. multisets), with exponential speed-up compared to the default Python implementation for multisets with high multiplicity. Based on <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://arxiv.org/abs/1503.00067">O(1) Time Generation of Adjacent Multiset Combinations</a> by Tadao Takaoka.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Application" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 transition-all cursor-pointer"><a href="https://d1n2j965q39dpw.cloudfront.net/" target="_blank">Infinitree <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 transition-all cursor-pointer"><a href="https://d1n2j965q39dpw.cloudfront.net/">Infinitree <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Web Application</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-infinitree.png">
-                    <span>Solver and tree visualisations for the <a class="text-cyan-600 hover:text-cyan-800 transition-all" href="https://neal.fun/infinite-craft/" target="_blank">Infinite Craft</a> game by Neal Agarwal.</span>
+                    <span>Solver and tree visualisations for the <a class="text-cyan-600 hover:text-cyan-800 transition-all" href="https://neal.fun/infinite-craft/">Infinite Craft</a> game by Neal Agarwal.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.ResearchThesis" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'benchmarking-polars-vs-pandas'" target="_blank">Benchmarking Polars vs Pandas<fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a [routerLink]="'benchmarking-polars-vs-pandas'">Benchmarking Polars vs Pandas<fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Research Article</h4>
                     <img class="border border-gray-300 mb-3" src="assets/polars-pandas-splash.png">
                     <span>Comparing the Polars and Pandas dataframe libraries for Python across performance, functionality, ecosystem and more.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.LearningResource" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/web-dev-crash-course/" target="_blank">Web Dev Crash Course <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/web-dev-crash-course/">Web Dev Crash Course <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Learning Resource</h4>
                     <img class="border border-gray-300 mb-3" ngSrc="assets/thumb-web-dev-crash-course.png" height="362"
                          width="764">
                     <span>Jump head first into key concepts in modern Web Development, and get hands-on with exercises designed to give you a sense of what Web Development is like.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Code" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/network_flow_solver" target="_blank">Network Flow Solver <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/network_flow_solver">Network Flow Solver <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Code (Python)</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-network-flow-solver.png">
                     <span>Solves for values in a directed graph where flow in/out of nodes are conserved, and where only some flow values are known.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Application" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/numerical-integrators-v4/" target="_blank">PathViewer <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/numerical-integrators-v4/">PathViewer <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Application</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-path-viewer.png">
-                    <span>Player for trajectories in 3D space (including Gravitational N-Body and Spherical Pendulum examples). Trajectories were calculated numerically from scratch in Rust using a <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method" target="_blank">Dormand-Prince integrator</a>.</span>
+                    <span>Player for trajectories in 3D space (including Gravitational N-Body and Spherical Pendulum examples). Trajectories were calculated numerically from scratch in Rust using a <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method">Dormand-Prince integrator</a>.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Code" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/minilp-wasm" target="_blank">minilp WASM <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://github.com/jajetloh/minilp-wasm">minilp WASM <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Code (JS / WASM)</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-minilp-wasm.png">
-                    <span>JavaScript port (via WebAssembly) for the <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://crates.io/crates/minilp" target="_blank">minilp Rust crate</a>.</span>
+                    <span>JavaScript port (via WebAssembly) for the <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://crates.io/crates/minilp">minilp Rust crate</a>.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Application" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/parks-solver/" target="_blank">Parks Solver <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/parks-solver/">Parks Solver <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Application</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-parks-solver.png">
-                    <span>Solver User Interface for the <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.xymene.com/" target="_blank">Parks Puzzle</a> game, using the HiGHS MILP solver.</span>
+                    <span>Solver User Interface for the <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://www.xymene.com/">Parks Puzzle</a> game, using the HiGHS MILP solver.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.Application" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh-sunshine-hours-main-app-a2ktga.streamlit.app/" target="_blank">Sunshine Hours Explorer  <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh-sunshine-hours-main-app-a2ktga.streamlit.app/">Sunshine Hours Explorer  <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Application</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-sunshine-hours.png">
-                    <span>An interactive <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://streamlit.io/" target="_blank">Streamlit</a> application for exploring a Sunshine Hours dataset.</span>
+                    <span>An interactive <a class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all" href="https://streamlit.io/">Streamlit</a> application for exploring a Sunshine Hours dataset.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.LearningResource" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/angular-class/" target="_blank">Angular Class (Tutorial) <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="https://jajetloh.github.io/angular-class/">Angular Class (Tutorial) <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Learning Resource</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-angular-class.png">
                     <span>This tutorial gives a quick introduction into the main concepts used in Angular applications, including components, services, pipes, binding and more.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.ResearchThesis" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer c-anchor" id="thesis"><a href="assets/Lattice%20Protein%20Folding%20with%20Quantum%20Computation%20(no%20declaration)%20-%20Ja-Jet%20Loh.pdf" target="_blank">Lattice Protein Folding with Quantum Computation <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer c-anchor" id="thesis"><a href="assets/Lattice%20Protein%20Folding%20with%20Quantum%20Computation%20(no%20declaration)%20-%20Ja-Jet%20Loh.pdf">Lattice Protein Folding with Quantum Computation <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Research Thesis</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-thesis.png">
                     <span>This thesis presents an efficient theoretical quantum circuit for finding solutions to the Lattice Protein Folding problem, and simulated results using the Pawsey Supercomputing Centre. This thesis and accompanying presentation were awarded a grade of 93% by the University of Western Australia.</span>
                 </div>
                 <div *ngIf="filterValue === undefined || filterValue === FilterValues.ResearchThesis" class="bg-white border border-gray-100 rounded-md p-2">
-                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="assets/Numero%20Algorithm.pdf" target="_blank">Numero Algorithm <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
+                    <h1 class="text-lg text-cyan-600 hover:text-cyan-800 hover:underline transition-all cursor-pointer"><a href="assets/Numero%20Algorithm.pdf">Numero Algorithm <fa-icon class="ml-1" [icon]="faLinkIcon" size="xs"></fa-icon></a></h1>
                     <h4 class="text-xs text-gray-400 mb-1">Research Article</h4>
                     <img class="border border-gray-300 mb-3" src="assets/thumb-numero.png">
                     <span>A brute-force algorithm for determining valid 'takes' in the Numero card game, using permutations of a multiset, and some puzzles solved with the algorithm at the end.</span>
@@ -131,10 +143,10 @@
     <div class="flex-col w-10/12 sm:w-8/12">
         <h1 class="text-3xl text-black c-anchor font-thin mb-3" id="contact">Contact</h1>
         <div>
-            <a href="https://www.linkedin.com/in/ja-jet-loh/" target="_blank" class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all"><fa-icon [icon]="faLinkedIn" class="mr-2"></fa-icon>www.linkedin.com/in/ja-jet-loh/</a>
+            <a href="https://www.linkedin.com/in/ja-jet-loh/" class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all"><fa-icon [icon]="faLinkedIn" class="mr-2"></fa-icon>www.linkedin.com/in/ja-jet-loh/</a>
         </div>
         <div>
-            <a href="https://github.com/jajetloh" target="_blank" class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all"><fa-icon [icon]="faGithub" class="mr-2"></fa-icon>github.com/jajetloh</a>
+            <a href="https://github.com/jajetloh" class="text-cyan-600 hover:text-cyan-800 hover:underline transition-all"><fa-icon [icon]="faGithub" class="mr-2"></fa-icon>github.com/jajetloh</a>
         </div>
     </div>
     <div class="flex-col w-1/12 sm:w-2/12"></div>
